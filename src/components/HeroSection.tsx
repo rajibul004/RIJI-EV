@@ -149,7 +149,7 @@ const ErickshawHeroSection = () => {
       </div>
 
       {/* Custom CSS for animations */}
-      <style jsx>{`
+      <style>{`
         @keyframes float {
           0%,
           100% {

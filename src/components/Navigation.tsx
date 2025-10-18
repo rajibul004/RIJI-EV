@@ -109,7 +109,7 @@ const Navigation = () => {
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         @keyframes slideIn {
           to {
             opacity: 1;

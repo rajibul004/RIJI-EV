@@ -1,3 +1,5 @@
+import Scooter1 from "../assets/Scooter1.png";
+import Toto2 from "../assets/toto2.png";
 import BikeCard from "./BikeCard";
 
 const BikeShopSection = () => {
@@ -7,14 +9,14 @@ const BikeShopSection = () => {
       price: "₹65,000",
       originalPrice: "₹72,000",
       rating: 4,
-      image: "/assets/Scooter.png",
+      image: Scooter1,
       category: "E-scooty",
     },
     {
       name: "Toto Smart E-Rickshaw",
       price: "₹95,000",
       rating: 5,
-      image: "/images/rickshaw1.png",
+      image: Toto2,
       category: "E-rickshaw",
     },
     {
@@ -22,14 +24,14 @@ const BikeShopSection = () => {
       price: "₹58,000",
       originalPrice: "₹62,000",
       rating: 3,
-      image: "/images/scooty2.png",
+      image: Scooter1,
       category: "E-scooty",
     },
     {
       name: "Toto Max Pro",
       price: "₹1,15,000",
       rating: 5,
-      image: "/assets/toto2.png",
+      image: Toto2,
       category: "E-rickshaw",
     },
   ];
