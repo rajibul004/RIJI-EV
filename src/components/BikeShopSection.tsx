@@ -3,61 +3,35 @@ import BikeCard from "./BikeCard";
 const BikeShopSection = () => {
   const bikes = [
     {
-      name: "SCOTT GENIUS 940",
-      price: "$4,450",
-      rating: 5,
-      image: "/placeholder.svg",
-      category: "SCOTT"
-    },
-    {
-      name: "ROCKY MOUNTAIN",
-      price: "$6,600",
+      name: "ZoomX Electric Scooty",
+      price: "₹65,000",
+      originalPrice: "₹72,000",
       rating: 4,
-      image: "/placeholder.svg",
-      category: "ROCKY MOUNTAIN"
+      image: "/assets/Scooter.png",
+      category: "E-scooty",
     },
     {
-      name: "CUBE STEREO",
-      price: "$3,200",
+      name: "Toto Smart E-Rickshaw",
+      price: "₹95,000",
       rating: 5,
-      image: "/placeholder.svg",
-      category: "CUBE"
+      image: "/images/rickshaw1.png",
+      category: "E-rickshaw",
     },
     {
-      name: "MERIDA ONE-SIXTY",
-      price: "$5,500",
-      rating: 4,
-      image: "/placeholder.svg",
-      category: "MERIDA"
+      name: "Flash Scooty X1",
+      price: "₹58,000",
+      originalPrice: "₹62,000",
+      rating: 3,
+      image: "/images/scooty2.png",
+      category: "E-scooty",
     },
     {
-      name: "YT TUES",
-      price: "$8,300",
+      name: "Toto Max Pro",
+      price: "₹1,15,000",
       rating: 5,
-      image: "/placeholder.svg",
-      category: "YT TUES"
+      image: "/assets/toto2.png",
+      category: "E-rickshaw",
     },
-    {
-      name: "TREK FUEL EX",
-      price: "$4,800",
-      rating: 4,
-      image: "/placeholder.svg",
-      category: "TREK"
-    },
-    {
-      name: "ORBEA OCCAM",
-      price: "$3,900",
-      rating: 5,
-      image: "/placeholder.svg",
-      category: "ORBEA"
-    },
-    {
-      name: "MONDRAKER CRAFTY",
-      price: "$7,200",
-      rating: 5,
-      image: "/placeholder.svg",
-      category: "MONDRAKER"
-    }
   ];
 
   return (
@@ -68,16 +42,17 @@ const BikeShopSection = () => {
             BEST BIKE SHOP
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Discover our premium collection of mountain bikes from the world's leading brands
+            Discover our premium collection of mountain bikes from the world's
+            leading brands
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {bikes.map((bike, index) => (
             <BikeCard key={index} {...bike} />
           ))}
         </div>
-        
+
         <div className="text-center mt-12">
           <button className="bg-electric-blue text-white px-8 py-3 rounded-lg font-semibold hover:bg-electric-blue-dark transition-colors">
             VIEW ALL PRODUCTS
