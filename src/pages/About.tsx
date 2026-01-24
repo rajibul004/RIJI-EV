@@ -12,6 +12,7 @@ import {
   MapPin,
   Phone,
 } from "lucide-react";
+import Navigation from "@/components/Navigation";
 
 // Type definitions
 interface StatsCardProps {
@@ -127,6 +128,8 @@ const About: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black text-white">
+      <Navigation />
+
       {/* Hero Section - Introduction */}
       <div className="relative min-h-screen flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
