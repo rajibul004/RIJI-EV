@@ -1,171 +1,150 @@
-import { Button } from "@/components/ui/button";
-import { Play, Zap, Shield, Leaf } from "lucide-react";
-import heroRickshaw from "@/assets/toto2.png";
+import { motion } from "framer-motion";
+import erickshaw from "@/assets/e-rickshaw.png";
 
-const ErickshawHeroSection = () => {
+const HeroLanding = () => {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#F0F0F0] via-[#00BCD4]/10 to-[#1C1F4A]/20">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {/* Geometric shapes */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-[#00BCD4]/10 rounded-full animate-pulse"></div>
-        <div
-          className="absolute top-1/2 right-20 w-24 h-24 bg-[#FF6F00]/15 rotate-45 animate-bounce"
-          style={{ animationDuration: "3s" }}
-        ></div>
-        <div
-          className="absolute bottom-32 left-1/4 w-16 h-16 bg-[#1C1F4A]/20 rounded-full animate-ping"
-          style={{ animationDuration: "4s" }}
-        ></div>
-
-        {/* Road lines animation */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 opacity-20">
-          <div className="absolute bottom-8 w-full">
-            <div className="flex space-x-8 animate-pulse">
-              <div className="w-16 h-1 bg-[#121212] rounded-full"></div>
-              <div className="w-16 h-1 bg-[#121212] rounded-full"></div>
-              <div className="w-16 h-1 bg-[#121212] rounded-full"></div>
-              <div className="w-16 h-1 bg-[#121212] rounded-full"></div>
-            </div>
-          </div>
-        </div>
+    <section className="relative min-h-screen overflow-hidden flex items-center">
+      {/* ================= BACKGROUND BLUR IMAGE ================= */}
+      <div className="absolute inset-0 -z-30">
+        <img
+          src={erickshaw}
+          alt=""
+          className="w-full h-full object-cover blur-3xl scale-125 opacity-25"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/50 via-cyan-900/30 to-black/70" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center relative z-10">
-        {/* Left Content */}
-        <div className="space-y-8">
-          <div className="space-y-6">
-            <div className="flex items-center space-x-2 text-[#FF6F00] font-semibold">
-              <Zap className="w-5 h-5" />
-              <span className="text-sm uppercase tracking-wide">
-                Electric Mobility
+      {/* ================= AI GLOW ORBS ================= */}
+      <div className="absolute inset-0 -z-20">
+        <div className="absolute top-20 left-20 w-[420px] h-[420px] bg-cyan-400/40 blur-[160px] rounded-full animate-pulse" />
+        <div className="absolute bottom-20 right-32 w-[520px] h-[520px] bg-blue-500/40 blur-[180px] rounded-full animate-pulse" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
+        {/* ================= LEFT CONTENT ================= */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9 }}
+          className="relative z-10"
+        >
+          {/* ===== TEXT SECTION ===== */}
+          <div className="max-w-xl space-y-6">
+            {/* Badge Box */}
+            <div
+              className="inline-flex items-center px-5 py-2 rounded-full 
+    bg-cyan-500/15 backdrop-blur border border-cyan-400/30"
+            >
+              <span className="text-sm font-semibold tracking-widest uppercase text-cyan-300">
+                Eco-Charge Series
               </span>
             </div>
 
-            <h1 className="text-5xl lg:text-7xl font-bold leading-tight text-[#121212]">
-              SUSTAINABLE
-              <br />
-              <span className="text-[#00BCD4]">TRANSPORTATION</span>
-            </h1>
-
-            <p className="text-xl text-[#1C1F4A]/80 max-w-lg leading-relaxed">
-              Experience eco-friendly urban mobility with our advanced electric
-              rickshaws. Built for comfort, efficiency, and environmental
-              responsibility.
-            </p>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button
-              size="lg"
-              className="bg-[#FF6F00] hover:bg-[#FF6F00]/90 text-white px-8 py-6 text-lg font-semibold rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-            >
-              <Zap className="w-5 h-5 mr-2" />
-              EXPLORE MODELS
-            </Button>
-
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 border-[#00BCD4] text-[#00BCD4] hover:bg-[#00BCD4] hover:text-white px-8 py-6 text-lg font-semibold rounded-full transition-all duration-300"
-            >
-              <Play className="w-5 h-5 mr-2" />
-              WATCH DEMO
-            </Button>
-          </div>
-
-          {/* Features Grid */}
-          <div className="grid grid-cols-3 gap-6 pt-8">
-            <div className="text-center p-4 rounded-2xl bg-white/50 backdrop-blur-sm border border-[#00BCD4]/20 hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 bg-[#00BCD4]/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Leaf className="w-6 h-6 text-[#00BCD4]" />
-              </div>
-              <div className="text-2xl font-bold text-[#121212]">100%</div>
-              <div className="text-sm text-[#1C1F4A]/70">Eco-Friendly</div>
+            {/* Heading Box */}
+            <div className="space-y-2">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white">
+                Smart Electric
+              </h1>
+              <h2
+                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold 
+      text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400"
+              >
+                Mobility for Everyday India
+              </h2>
             </div>
 
-            <div className="text-center p-4 rounded-2xl bg-white/50 backdrop-blur-sm border border-[#FF6F00]/20 hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 bg-[#FF6F00]/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Zap className="w-6 h-6 text-[#FF6F00]" />
-              </div>
-              <div className="text-2xl font-bold text-[#121212]">80km</div>
-              <div className="text-sm text-[#1C1F4A]/70">Range</div>
-            </div>
-
-            <div className="text-center p-4 rounded-2xl bg-white/50 backdrop-blur-sm border border-[#1C1F4A]/20 hover:shadow-lg transition-all duration-300">
-              <div className="w-12 h-12 bg-[#1C1F4A]/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                <Shield className="w-6 h-6 text-[#1C1F4A]" />
-              </div>
-              <div className="text-2xl font-bold text-[#121212]">5★</div>
-              <div className="text-sm text-[#1C1F4A]/70">Safety Rating</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Image Section */}
-        <div className="relative">
-          {/* Gradient backdrop */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#00BCD4]/20 via-transparent to-[#FF6F00]/10 rounded-[3rem] blur-3xl transform rotate-6"></div>
-
-          {/* Floating elements around rickshaw */}
-          <div className="absolute -top-8 -left-8 w-24 h-24 bg-[#00BCD4]/20 rounded-full animate-pulse"></div>
-          <div
-            className="absolute -bottom-12 -right-12 w-32 h-32 bg-[#FF6F00]/15 rounded-full animate-bounce"
-            style={{ animationDuration: "4s" }}
-          ></div>
-
-          {/* Main rickshaw image */}
-          <div className="relative z-10 transform hover:scale-105 transition-transform duration-500">
-            <img
-              src={heroRickshaw}
-              alt="Electric Rickshaw - Sustainable Urban Transport"
-              className="w-full h-auto max-w-2xl mx-auto drop-shadow-2xl"
-            />
-
-            {/* Floating info cards */}
-            <div className="absolute top-1/4 -left-8 bg-white rounded-2xl p-4 shadow-xl animate-float">
-              <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-[#00BCD4] rounded-full animate-pulse"></div>
-                <span className="text-sm font-semibold text-[#121212]">
-                  Zero Emissions
-                </span>
-              </div>
-            </div>
-
+            {/* Description Box */}
             <div
-              className="absolute bottom-1/4 -right-8 bg-white rounded-2xl p-4 shadow-xl animate-float"
-              style={{ animationDelay: "1s" }}
+              className="rounded-2xl bg-white/10 backdrop-blur 
+    border border-white/20 px-6 py-4"
             >
-              <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-[#FF6F00] rounded-full animate-pulse"></div>
-                <span className="text-sm font-semibold text-[#121212]">
-                  Fast Charging
+              <p className="text-base sm:text-lg text-gray-200 leading-relaxed">
+                Designed for{" "}
+                <span className="text-white font-semibold">efficiency</span>,{" "}
+                <span className="text-white font-semibold">reliability</span>,
+                and{" "}
+                <span className="text-white font-semibold">
+                  low running cost
                 </span>
-              </div>
+                , RIJI EV e-rickshaws help drivers{" "}
+                <span className="text-cyan-300 font-semibold">earn more</span>{" "}
+                while contributing to a{" "}
+                <span className="text-cyan-300 font-semibold">
+                  cleaner future
+                </span>
+                .
+              </p>
+            </div>
+
+            {/* Supporting Info Box */}
+            <div
+              className="rounded-xl bg-black/30 backdrop-blur 
+    border border-white/10 px-5 py-3"
+            >
+              <p className="text-sm text-gray-300">
+                Built with durable materials, smart electric systems, and
+                dependable after-sales support.
+              </p>
+            </div>
+
+            {/* Feature Boxes */}
+            <div className="grid grid-cols-2 gap-4 pt-2">
+              <div className="feature-box">⚡ Zero Tailpipe Emissions</div>
+              <div className="feature-box">🔋 Up to 100 km per Charge</div>
+              <div className="feature-box">🛠 Low Maintenance Design</div>
+              <div className="feature-box">💰 Higher Daily Earnings</div>
             </div>
           </div>
-        </div>
+        </motion.div>
+
+        {/* ================= RIGHT PRODUCT ================= */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+          className="relative flex justify-center items-center"
+        >
+          {/* ===== CIRCULAR AI BACKGROUND (KEY CHANGE) ===== */}
+          <div className="absolute w-[520px] h-[520px] lg:w-[620px] lg:h-[620px] rounded-full bg-white/10 backdrop-blur-2xl border border-white/20 shadow-2xl" />
+
+          {/* Inner glow ring */}
+          <div className="absolute w-[420px] h-[420px] lg:w-[520px] lg:h-[520px] rounded-full bg-gradient-to-br from-cyan-400/20 to-blue-500/20 blur-2xl" />
+
+          <motion.img
+            src={erickshaw}
+            alt="RIJI EV Electric Rickshaw"
+            className="
+    relative z-10
+    w-[700px]
+    sm:w-[820px]
+    md:w-[950px]
+    lg:w-[1100px]
+    xl:w-[1300px]
+    2xl:w-[1500px]
+    max-w-none
+    drop-shadow-[0_60px_120px_rgba(0,0,0,0.8)]
+  "
+            animate={{ y: [0, -22, 0] }}
+            transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+          />
+
+          {/* CTA RING */}
+          <div className="absolute -right-6 top-1/2 -translate-y-1/2">
+            <div className="relative w-32 h-32 rounded-full border border-cyan-400/40 flex items-center justify-center backdrop-blur">
+              <div className="absolute inset-0 rounded-full border-2 border-cyan-400 animate-ping opacity-30" />
+              <button className="text-sm font-semibold text-cyan-300 hover:text-white transition">
+                Book a<br />
+                Test Drive
+              </button>
+            </div>
+          </div>
+        </motion.div>
       </div>
 
-      {/* Custom CSS for animations */}
-      <style>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-        }
-
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-      `}</style>
+      {/* ================= NOISE OVERLAY ================= */}
+      <div className="pointer-events-none absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22 opacity=%220.035%22/%3E%3C/svg%3E')]" />
     </section>
   );
 };
 
-export default ErickshawHeroSection;
+export default HeroLanding;

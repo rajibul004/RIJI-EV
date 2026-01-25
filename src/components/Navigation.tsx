@@ -1,120 +1,155 @@
-import { useState } from "react";
-import { Menu, X, Sparkles } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const navItems = ["Home", "Products", "About", "Contact"];
 
   return (
-    <nav className="relative bg-transparent backdrop-blur-2xl text-gray px-8 sticky top-0 z-50 border-b border-white/10 shadow-2xl shadow-black/80">
-      {/* Ambient glow effects */}
-      <div className="absolute inset-0 bg-gradient-to-r from-gray-100/20 via-transparent to-gray-100/20"></div>
-      <div className="absolute top-0 left-1/4 w-96 h-1 bg-gradient-to-r from-transparent via-gray-400/30 to-transparent blur-sm"></div>
+    <nav className="sticky top-0 z-50">
+      {/* ================= AI GLOW + NOISE BACKGROUND ================= */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        {/* Glow Orbs (synced with hero via CSS vars) */}
+        <div className="glow-orb glow-orb-1" />
+        <div className="glow-orb glow-orb-2" />
 
-      <div className="relative max-w-5xl mx-auto flex items-center justify-between py-2">
-        {/* Logo with floating animation */}
-        <div className="flex items-center group">
-          <div className="relative">
-            <div className="absolute -inset-1 bg-gradient-to-r from-gray-600 via-slate-500 to-gray-700 rounded-2xl blur opacity-30 group-hover:opacity-50 transition-all duration-500"></div>
-            <div className="relative w-14 h-14 flex items-center justify-center rounded-2xl backdrop-blur-xl group-hover:scale-105 transition-all duration-500">
-              <div className="relative flex items-center justify-center rounded-2xl bg-gradient-to-br backdrop-blur-xl group-hover:scale-105 transition-all duration-500">
-                <img
-                  src={logo}
-                  alt="RIJI Logo"
-                  className="w-12 h-12 object-contain shadow-inner transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-            </div>
-          </div>
-          <div className="ml-4 hidden sm:block">
-            <div className="text-xl font-bold bg-gradient-to-r from-white via-gray-200 to-slate-300 bg-clip-text text-transparent">
-              RIJI
-            </div>
-          </div>
-        </div>
+        {/* Glass base */}
+        <div className="absolute inset-0 bg-white/40 dark:bg-black/40 backdrop-blur-2xl" />
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-8">
-          {["HOME", "PRODUCTS", "ABOUT", "CONTACT"].map((item, index) => (
-            <a
-              key={item}
-              href={item === "HOME" ? "#" : `/${item.toLowerCase()}`}
-              className="relative text-gray-800 hover:text-gray transition-all duration-500 group font-medium tracking-widest text-sm"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <span className="relative z-10">{item}</span>
-
-              {/* Glow effect on hover */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500 -mx-6 -my-3 blur-sm"></div>
-
-              {/* Glass morphism background */}
-              <div className="absolute inset-0 bg-white/5 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500 -mx-6 -my-3 border border-white/10 backdrop-blur-sm"></div>
-
-              {/* Animated underline */}
-              <div className="absolute -bottom-3 left-0 right-0 h-px">
-                <div className="w-0 h-full bg-gradient-to-r from-transparent via-white to-transparent group-hover:w-full transition-all duration-700 rounded-full shadow-lg shadow-white/50"></div>
-              </div>
-
-              {/* Floating dots */}
-              <div className="absolute -top-1 -right-1 w-1 h-1 bg-white/60 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200"></div>
-            </a>
-          ))}
-        </div>
-
-        {/* Mobile menu button with premium styling */}
-        <button
-          className="md:hidden relative group"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <div className="absolute -inset-1 bg-gradient-to-r from-gray-600 to-slate-700 rounded-xl blur opacity-30 group-hover:opacity-50 transition-all duration-300"></div>
-          <div className="relative text-gray-800 hover:text-gray hover:bg-white/10 border border-white/20 rounded-xl p-3 backdrop-blur-xl transition-all duration-300 hover:scale-105 group-hover:border-white/30">
-            {isMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
-          </div>
-        </button>
+        {/* Noise overlay */}
+        <div className="noise-layer" />
       </div>
 
-      {/* Mobile Menu with premium animations */}
-      {isMenuOpen && (
-        <div className="md:hidden border-t border-white/10 backdrop-blur-2xl bg-gradient-to-b from-slate-950/80 via-gray-950/90 to-black/95 relative overflow-hidden">
-          {/* Background texture */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/5"></div>
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+      {/* ================= NAV BAR ================= */}
+      <div
+        className={`transition-all duration-500 ${
+          isScrolled
+            ? "border-b border-white/30 shadow-xl"
+            : "border-b border-transparent"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          {/* Logo */}
+          <a href="/" className="flex items-center gap-3 group">
+            <div className="relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-[var(--glow-primary)] to-[var(--glow-secondary)] blur-lg opacity-0 group-hover:opacity-100 transition" />
+              <img
+                src={logo}
+                alt="Riji EV official logo"
+                className="w-10 h-10 relative z-10 object-contain"
+              />
+            </div>
+            <span className="text-xl font-bold bg-gradient-to-r from-[var(--glow-primary)] to-[var(--glow-secondary)] bg-clip-text text-transparent">
+              Riji EV
+            </span>
+          </a>
 
-          <div className="relative flex flex-col space-y-2 py-6">
-            {["HOME", "PRODUCTS", "ABOUT", "CONTACT"].map((item, index) => (
+          {/* Desktop Nav */}
+          <div className="hidden md:flex gap-10">
+            {navItems.map((item) => (
               <a
                 key={item}
-                href={item === "HOME" ? "#" : `/${item.toLowerCase()}`}
-                className="relative text-gray-800 hover:text-gray transition-all duration-500 group font-medium tracking-widest text-sm mx-4 overflow-hidden"
-                style={{
-                  animation: `slideIn 0.5s ease-out forwards`,
-                  animationDelay: `${index * 100}ms`,
-                  opacity: 0,
-                  transform: "translateX(-20px)",
-                }}
+                href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                className="relative text-sm font-medium text-gray-800 dark:text-gray-200 group"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-white/10 to-white/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 scale-x-0 group-hover:scale-x-100 origin-left"></div>
-                <div className="relative px-8 py-4 rounded-2xl border border-transparent group-hover:border-white/20 backdrop-blur-sm transition-all duration-500 group-hover:shadow-lg group-hover:shadow-white/10">
-                  <span className="relative z-10">{item}</span>
-                  {/* Floating particle effect */}
-                  <div className="absolute top-1/2 right-4 w-1 h-1 bg-white/40 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-300"></div>
-                </div>
+                {item}
+                <span className="absolute -bottom-2 left-0 h-[2px] w-0 bg-gradient-to-r from-[var(--glow-primary)] to-[var(--glow-secondary)] group-hover:w-full transition-all" />
               </a>
             ))}
           </div>
-        </div>
-      )}
 
+          {/* Mobile Toggle */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden p-2 rounded-xl bg-white/60 dark:bg-black/60 backdrop-blur-xl border border-white/30"
+          >
+            {isMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
+      </div>
+
+      {/* ================= MOBILE MENU ================= */}
+      <div
+        className={`md:hidden transition-all duration-700 overflow-hidden ${
+          isMenuOpen ? "max-h-72 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <ul className="bg-white/80 dark:bg-black/80 backdrop-blur-2xl border-t border-white/30 py-6 space-y-4 text-center">
+          {navItems.map((item, i) => (
+            <li
+              key={item}
+              className="animate-fadeIn"
+              style={{ animationDelay: `${i * 120}ms` }}
+            >
+              <a
+                href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                className="font-semibold text-gray-800 dark:text-gray-200"
+              >
+                {item}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* ================= STYLES ================= */}
       <style>{`
-        @keyframes slideIn {
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
+        /* HERO-SYNCED COLORS */
+        :root {
+          --glow-primary: #22d3ee;
+          --glow-secondary: #3b82f6;
+        }
+
+        /* FLOATING GLOW ORBS */
+        .glow-orb {
+          position: absolute;
+          width: 320px;
+          height: 320px;
+          border-radius: 9999px;
+          filter: blur(120px);
+          opacity: 0.45;
+          animation: float 12s ease-in-out infinite;
+        }
+        .glow-orb-1 {
+          background: var(--glow-primary);
+          top: -120px;
+          left: 20%;
+        }
+        .glow-orb-2 {
+          background: var(--glow-secondary);
+          top: -160px;
+          right: 20%;
+          animation-delay: 4s;
+        }
+
+        @keyframes float {
+          0%,100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(40px) scale(1.05); }
+        }
+
+        /* NOISE OVERLAY */
+        .noise-layer {
+          pointer-events: none;
+          position: absolute;
+          inset: 0;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.5s ease forwards;
         }
       `}</style>
     </nav>
