@@ -1,65 +1,100 @@
 import { Award, Clock, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 
+/* ================= ANIMATIONS ================= */
+const container: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.18, delayChildren: 0.25 },
+  },
+};
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 28 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+  },
+};
+
+const floatSlow: Variants = {
+  animate: {
+    y: [0, -8, 0],
+    transition: {
+      duration: 6,
+      repeat: Infinity,
+      ease: [0.4, 0, 0.2, 1],
+    },
+  },
+};
+
+/* ================= DATA ================= */
 const features = [
   {
     icon: Sparkles,
     title: "Premium-Grade Construction",
     description:
-      "High-strength aluminum chassis and reinforced body panels built for Indian road conditions.",
+      "High-strength chassis and reinforced body engineered for Indian road conditions.",
   },
   {
     icon: Award,
     title: "Intelligent EV Engineering",
     description:
-      "Efficient motors, smart battery protection, and optimized power delivery for maximum range.",
+      "Efficient motors, smart battery protection, and optimized power delivery.",
   },
   {
     icon: Clock,
     title: "Reliable Service & Support",
     description:
-      "24/7 customer assistance backed by a growing nationwide service network.",
+      "24/7 assistance with a growing nationwide service and spare network.",
   },
 ];
 
 const stats = [
   { value: "NO.1", label: "Trusted E-Rickshaw Brand" },
-  { value: "50+", label: "Years Experience" },
+  { value: "50+", label: "Years of Experience" },
   { value: "10K+", label: "Vehicles on Road" },
   { value: "8+", label: "Industry Awards" },
 ];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-};
-
+/* ================= SECTION ================= */
 const QualitySectionSafe = () => {
   return (
     <section
-      className="relative h-screen overflow-hidden flex items-center
-      bg-gradient-to-br from-cyan-50 via-sky-50 to-white"
+      className="relative min-h-screen overflow-hidden flex items-center
+      bg-gradient-to-br from-sky-50 via-cyan-50 to-white"
     >
-      {/* ================= SOFT 3D GLOW (LIGHT) ================= */}
+      {/* ===== AI GLOW BACKGROUND ===== */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-10 left-10 w-[360px] h-[360px] bg-cyan-400/30 blur-[120px] rounded-full" />
-        <div className="absolute bottom-10 right-20 w-[420px] h-[420px] bg-blue-400/30 blur-[140px] rounded-full" />
+        <div
+          className="absolute top-[-120px] left-[-120px]
+          w-[420px] h-[420px] bg-cyan-400/30 blur-[160px] rounded-full"
+        />
+        <div
+          className="absolute bottom-[-120px] right-[-80px]
+          w-[480px] h-[480px] bg-blue-400/30 blur-[180px] rounded-full"
+        />
+        <div className="absolute inset-0 bg-white/40 backdrop-blur-3xl" />
       </div>
 
       <motion.div
+        variants={container}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
         className="relative max-w-7xl mx-auto px-6 w-full"
       >
-        {/* ================= GRID LAYOUT ================= */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* ================= LEFT CONTENT ================= */}
-          <motion.div variants={fadeUp} className="max-w-xl">
+        <div className="grid lg:grid-cols-2 gap-14 items-center">
+          {/* ================= LEFT ================= */}
+          <motion.div variants={fadeUp} className="max-w-xl space-y-6">
             <span
-              className="inline-block mb-4 px-5 py-2 rounded-full
-              bg-white/70 backdrop-blur border border-cyan-200
-              text-cyan-700 text-sm font-semibold"
+              className="inline-block px-5 py-2 rounded-full
+              bg-white/70 backdrop-blur-xl
+              border border-cyan-200/60
+              text-cyan-700 text-xs tracking-widest uppercase font-semibold"
             >
               Why RIJI EV
             </span>
@@ -67,24 +102,31 @@ const QualitySectionSafe = () => {
             <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
               Classic Manufacturing
               <br />
-              <span className="bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+              <span
+                className="bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600
+                bg-clip-text text-transparent"
+              >
                 Powered by Modern EV Innovation
               </span>
             </h2>
 
-            <p className="mt-5 text-gray-600 leading-relaxed">
-              RIJI EV blends decades of manufacturing expertise with modern
-              electric vehicle technology to deliver durable, efficient, and
-              trusted e-rickshaws across India.
+            <p className="text-gray-600 text-lg leading-relaxed">
+              RIJI EV combines decades of manufacturing expertise with modern
+              electric vehicle technology to deliver safe, durable, and
+              future-ready mobility solutions.
             </p>
 
-            {/* ================= STATS ================= */}
-            <div className="mt-8 grid grid-cols-2 gap-4">
+            {/* ===== STATS ===== */}
+            <div className="grid grid-cols-2 gap-4 pt-4">
               {stats.map((s, i) => (
-                <div
+                <motion.div
                   key={i}
-                  className="rounded-2xl bg-white/70 backdrop-blur
-                  border border-white/50 px-4 py-4 text-center shadow-sm"
+                  variants={fadeUp}
+                  whileHover={{ y: -6 }}
+                  className="rounded-2xl p-5 text-center
+                  bg-white/70 backdrop-blur-xl
+                  border border-white/60
+                  shadow-[0_20px_50px_rgba(0,0,0,0.12)]"
                 >
                   <div
                     className="text-2xl font-extrabold
@@ -93,31 +135,34 @@ const QualitySectionSafe = () => {
                   >
                     {s.value}
                   </div>
-                  <div className="mt-1 text-xs font-semibold text-gray-600">
+                  <p className="text-xs font-semibold text-gray-600 mt-1">
                     {s.label}
-                  </div>
-                </div>
+                  </p>
+                </motion.div>
               ))}
             </div>
           </motion.div>
 
-          {/* ================= RIGHT FEATURES ================= */}
-          <div className="grid gap-5">
+          {/* ================= RIGHT ================= */}
+          <motion.div className="grid gap-6">
             {features.map((f, i) => (
               <motion.div
                 key={i}
                 variants={fadeUp}
-                transition={{ delay: i * 0.12 }}
-                whileHover={{ y: -6 }}
-                className="rounded-3xl bg-white/75 backdrop-blur
-                border border-white/60 p-6
-                shadow-md hover:shadow-xl transition"
+                animate="animate"
+                {...floatSlow}
+                whileHover={{ scale: 1.04 }}
+                className="rounded-3xl p-6
+                bg-white/80 backdrop-blur-2xl
+                border border-white/70
+                shadow-[0_30px_80px_rgba(0,0,0,0.15)]"
               >
                 <div className="flex items-start gap-4">
                   <div
-                    className="w-12 h-12 rounded-xl
+                    className="w-14 h-14 rounded-2xl
                     bg-gradient-to-br from-cyan-600 to-blue-600
-                    flex items-center justify-center text-white shrink-0"
+                    flex items-center justify-center text-white shrink-0
+                    shadow-[0_10px_30px_rgba(59,130,246,0.5)]"
                   >
                     <f.icon className="w-6 h-6" />
                   </div>
@@ -133,7 +178,7 @@ const QualitySectionSafe = () => {
                 </div>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     </section>

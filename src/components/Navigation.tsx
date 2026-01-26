@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
+import "../index.css";
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -69,6 +70,8 @@ const Navigation = () => {
 
           {/* Mobile Toggle */}
           <button
+            aria-label="Toggle navigation menu"
+            aria-expanded={isMenuOpen}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden p-2 rounded-xl bg-white/60 dark:bg-black/60 backdrop-blur-xl border border-white/30"
           >
@@ -100,58 +103,6 @@ const Navigation = () => {
           ))}
         </ul>
       </div>
-
-      {/* ================= STYLES ================= */}
-      <style>{`
-        /* HERO-SYNCED COLORS */
-        :root {
-          --glow-primary: #22d3ee;
-          --glow-secondary: #3b82f6;
-        }
-
-        /* FLOATING GLOW ORBS */
-        .glow-orb {
-          position: absolute;
-          width: 320px;
-          height: 320px;
-          border-radius: 9999px;
-          filter: blur(120px);
-          opacity: 0.45;
-          animation: float 12s ease-in-out infinite;
-        }
-        .glow-orb-1 {
-          background: var(--glow-primary);
-          top: -120px;
-          left: 20%;
-        }
-        .glow-orb-2 {
-          background: var(--glow-secondary);
-          top: -160px;
-          right: 20%;
-          animation-delay: 4s;
-        }
-
-        @keyframes float {
-          0%,100% { transform: translateY(0) scale(1); }
-          50% { transform: translateY(40px) scale(1.05); }
-        }
-
-        /* NOISE OVERLAY */
-        .noise-layer {
-          pointer-events: none;
-          position: absolute;
-          inset: 0;
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-        }
-
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(-8px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.5s ease forwards;
-        }
-      `}</style>
     </nav>
   );
 };

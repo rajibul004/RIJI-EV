@@ -92,16 +92,15 @@ const BikeShopSection = () => {
 
         {/* ===== CTA ===== */}
         <div className="text-center mt-16">
-          <Link to="/products">
-            <button
-              className="px-10 py-4 rounded-full text-base font-bold text-white
+          <Link
+            to="/products"
+            className="px-10 py-4 rounded-full text-base font-bold text-white
     bg-gradient-to-r from-emerald-500 via-cyan-500 to-blue-500
     shadow-[0_20px_60px_rgba(16,185,129,0.5)]
     hover:shadow-[0_30px_90px_rgba(16,185,129,0.7)]
     hover:scale-105 transition"
-            >
-              View All Products
-            </button>
+          >
+            View All Products
           </Link>
         </div>
       </div>

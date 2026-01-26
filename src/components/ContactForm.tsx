@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { enquirySchema, EnquiryPayload } from "@/validation/enquirySchema";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
 const ContactForm = () => {
   const [formData, setFormData] = useState<EnquiryPayload>({
     fullName: "",
@@ -21,9 +23,28 @@ const ContactForm = () => {
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
-    >
+    >,
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // ✅ MOVED OUT — THIS IS THE FIX
+  const handleBlur = (field: keyof EnquiryPayload) => {
+    const parsed = enquirySchema.safeParse(formData);
+
+    if (!parsed.success) {
+      const error = parsed.error.errors.find((err) => err.path[0] === field);
+
+      setErrors((prev) => ({
+        ...prev,
+        [field]: error?.message || "",
+      }));
+    } else {
+      setErrors((prev) => ({
+        ...prev,
+        [field]: "",
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -44,7 +65,7 @@ const ContactForm = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("https://riji-ev-backend.onrender.com/api/enquiries", {
+      const res = await fetch(`${API_BASE}/api/enquiries`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -74,28 +95,7 @@ const ContactForm = () => {
       setLoading(false);
       setTimeout(() => setPopup(null), 3000);
     }
-    const handleBlur = (field: keyof EnquiryPayload) => {
-      const parsed = enquirySchema.safeParse(formData);
-
-      if (!parsed.success) {
-        const error = parsed.error.errors.find((err) => err.path[0] === field);
-
-        setErrors((prev) => ({
-          ...prev,
-          [field]: error?.message || "",
-        }));
-      } else {
-        setErrors((prev) => ({
-          ...prev,
-          [field]: "",
-        }));
-      }
-    };
   };
-
-  function handleBlur(arg0: string): void {
-    throw new Error("Function not implemented.");
-  }
 
   return (
     <>
@@ -110,6 +110,8 @@ const ContactForm = () => {
           placeholder="Full Name"
           value={formData.fullName}
           onChange={handleChange}
+          onBlur={() => handleBlur("fullName")}
+          disabled={loading}
           className="w-full px-4 py-3 rounded-xl border"
         />
         {errors.fullName && (
@@ -122,6 +124,8 @@ const ContactForm = () => {
           placeholder="Email Address"
           value={formData.email}
           onChange={handleChange}
+          onBlur={() => handleBlur("email")}
+          disabled={loading}
           className="w-full px-4 py-3 rounded-xl border"
         />
         {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
@@ -132,25 +136,30 @@ const ContactForm = () => {
           value={formData.phone}
           onChange={handleChange}
           onBlur={() => handleBlur("phone")}
+          disabled={loading}
           className="w-full px-4 py-3 rounded-xl border"
         />
-        {errors.email && <p className="text-xs text-red-500">{errors.phone}</p>}
+        {errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}
+
+        <label htmlFor="subject" className="sr-only">
+          Enquiry Subject
+        </label>
 
         <select
+          id="subject"
           name="subject"
-          aria-label="Enquiry Subject"
           value={formData.subject}
           onChange={handleChange}
+          onBlur={() => handleBlur("subject")}
+          disabled={loading}
           className="w-full px-4 py-3 rounded-xl border bg-white"
         >
           <option value="">Select Subject</option>
           <option value="test-drive">Test Drive</option>
           <option value="purchase">Purchase</option>
           <option value="support">Support</option>
+          <option value="Dealership Enquiry">Dealership Enquiry</option>
         </select>
-        {errors.subject && (
-          <p className="text-xs text-red-500">{errors.subject}</p>
-        )}
 
         <textarea
           name="message"
@@ -158,6 +167,8 @@ const ContactForm = () => {
           placeholder="Your Message"
           value={formData.message}
           onChange={handleChange}
+          onBlur={() => handleBlur("message")}
+          disabled={loading}
           className="w-full px-4 py-3 rounded-xl border"
         />
         {errors.message && (
@@ -190,7 +201,7 @@ const ContactForm = () => {
                 popup.type === "success" ? "border-green-500" : "border-red-500"
               }`}
             >
-              <h3 className="text-xl font-bold mb-2 text-green-600">
+              <h3 className="text-xl font-bold mb-2">
                 {popup.type === "success" ? "Thank You 🎉" : "Error ❌"}
               </h3>
 

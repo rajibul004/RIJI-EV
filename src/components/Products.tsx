@@ -4,6 +4,31 @@ import { products as allProducts } from "../components/ProductsData";
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER;
+
+interface Spec {
+  label: string;
+  value: string;
+  Icon: React.ElementType;
+}
+
+interface FeatureSection {
+  title: string;
+  items: string[];
+}
+
+interface Product {
+  id: number;
+  name: string;
+  category: string;
+  categoryLabel: string;
+  price: number;
+  image: string;
+  specs: Spec[];
+  features: FeatureSection[];
+  colors: string[];
+}
+
 /* -------------------- Animations -------------------- */
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 12 },
@@ -31,9 +56,7 @@ const cardVariants: Variants = {
 };
 
 /* -------------------- Specs Item -------------------- */
-const SpecItem = ({ label, value, Icon }: any) => {
-  if (!Icon) return null;
-
+const SpecItem = ({ label, value, Icon }: Spec) => {
   return (
     <motion.div
       variants={itemVariants}
@@ -48,8 +71,14 @@ const SpecItem = ({ label, value, Icon }: any) => {
 };
 
 /* -------------------- Product Card -------------------- */
-const ProductCard = ({ product, index }: any) => {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+const ProductCard = ({
+  product,
+  index,
+}: {
+  product: Product;
+  index: number;
+}) => {
+  const [selectedColor, setSelectedColor] = useState<string>(product.colors[0]);
 
   return (
     <motion.div
@@ -79,7 +108,8 @@ shadow-[0_25px_60px_rgba(0,0,0,0.12)]"
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-[360px] object-contain drop-shadow-xl"
+          loading="lazy"
+          decoding="async"
         />
       </motion.div>
 
@@ -105,7 +135,7 @@ shadow-[0_25px_60px_rgba(0,0,0,0.12)]"
           variants={itemVariants}
           className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-3 border-t"
         >
-          {product.specs.map((spec: any, i: number) => (
+          {product.specs.map((spec: Spec, i: number) => (
             <SpecItem key={i} {...spec} />
           ))}
         </motion.div>
@@ -181,7 +211,7 @@ shadow-[0_25px_60px_rgba(0,0,0,0.12)]"
             className="bg-green-600 text-white px-6 py-3 rounded-xl text-sm font-medium flex items-center gap-2 hover:bg-green-700 transition"
             onClick={() =>
               window.open(
-                `https://wa.me/919876543210?text=${encodeURIComponent(
+                `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
                   `Hi RIJI EV! I'm interested in the ${product.name} in ${selectedColor} color. Please share price, availability and test ride details.`,
                 )}`,
                 "_blank",

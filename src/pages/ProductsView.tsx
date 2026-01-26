@@ -8,8 +8,6 @@ const ProductsPage = () => {
       <Navigation />
       {/* Main Content */}
       <main className="pt-4">
-        {" "}
-        {/* Add padding to avoid overlap with sticky navbar */}
         <ProductsSection />
       </main>
       <Footer /> {/* Footer Component */}
