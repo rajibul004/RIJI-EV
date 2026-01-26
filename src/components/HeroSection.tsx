@@ -28,71 +28,98 @@ const HeroLanding = () => {
           transition={{ duration: 0.9 }}
           className="relative z-10"
         >
-          {/* ===== TEXT SECTION ===== */}
-          <div className="max-w-xl space-y-6">
-            {/* Badge Box */}
+          <div className="max-w-xl space-y-7">
+            {/* Badge */}
             <div
-              className="inline-flex items-center px-5 py-2 rounded-full 
-    bg-cyan-500/15 backdrop-blur border border-cyan-400/30"
+              className="inline-flex items-center px-5 py-2 rounded-full
+      bg-black/60 backdrop-blur
+      border border-cyan-400/40
+      shadow-[0_0_25px_rgba(34,211,238,0.35)]"
             >
               <span className="text-sm font-semibold tracking-widest uppercase text-cyan-300">
                 Eco-Charge Series
               </span>
             </div>
 
-            {/* Heading Box */}
-            <div className="space-y-2">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white">
+            {/* Headings */}
+            <div className="space-y-3">
+              <h1
+                className="text-4xl sm:text-5xl lg:text-6xl
+        font-extrabold text-white leading-tight
+        drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)]"
+              >
                 Smart Electric
               </h1>
+
               <h2
-                className="text-3xl sm:text-4xl lg:text-5xl font-extrabold 
-      text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-400 to-indigo-400"
+                className="text-3xl sm:text-4xl lg:text-5xl
+        font-extrabold
+        bg-gradient-to-r from-cyan-300 via-sky-400 to-indigo-400
+        bg-clip-text text-transparent
+        drop-shadow-[0_6px_20px_rgba(0,0,0,0.9)]"
               >
                 Mobility for Everyday India
               </h2>
             </div>
 
-            {/* Description Box */}
+            {/* Description Card */}
             <div
-              className="rounded-2xl bg-white/10 backdrop-blur 
-    border border-white/20 px-6 py-4"
+              className="relative rounded-2xl p-6
+      bg-black/65 backdrop-blur-md
+      border border-white/15
+      shadow-[0_25px_70px_rgba(0,0,0,0.75)]"
             >
-              <p className="text-base sm:text-lg text-gray-200 leading-relaxed">
+              <p className="text-base sm:text-lg text-slate-100 leading-relaxed">
                 Designed for{" "}
-                <span className="text-white font-semibold">efficiency</span>,{" "}
-                <span className="text-white font-semibold">reliability</span>,
+                <span className="font-semibold text-cyan-300">efficiency</span>,{" "}
+                <span className="font-semibold text-sky-300">reliability</span>,
                 and{" "}
-                <span className="text-white font-semibold">
+                <span className="font-semibold text-indigo-300">
                   low running cost
                 </span>
-                , RIJI EV e-rickshaws help drivers{" "}
-                <span className="text-cyan-300 font-semibold">earn more</span>{" "}
-                while contributing to a{" "}
-                <span className="text-cyan-300 font-semibold">
+                . RIJI EV e-rickshaws help drivers{" "}
+                <span className="font-semibold text-cyan-300">earn more</span>{" "}
+                while supporting a{" "}
+                <span className="font-semibold text-sky-300">
                   cleaner future
                 </span>
                 .
               </p>
             </div>
 
-            {/* Supporting Info Box */}
+            {/* Supporting Info */}
             <div
-              className="rounded-xl bg-black/30 backdrop-blur 
-    border border-white/10 px-5 py-3"
+              className="rounded-xl px-5 py-4
+      bg-black/55 backdrop-blur
+      border border-white/10"
             >
-              <p className="text-sm text-gray-300">
+              <p className="text-sm text-slate-200">
                 Built with durable materials, smart electric systems, and
-                dependable after-sales support.
+                dependable after-sales support across India.
               </p>
             </div>
 
-            {/* Feature Boxes */}
+            {/* Features */}
             <div className="grid grid-cols-2 gap-4 pt-2">
-              <div className="feature-box">⚡ Zero Tailpipe Emissions</div>
-              <div className="feature-box">🔋 Up to 100 km per Charge</div>
-              <div className="feature-box">🛠 Low Maintenance Design</div>
-              <div className="feature-box">💰 Higher Daily Earnings</div>
+              {[
+                "⚡ Zero Tailpipe Emissions",
+                "🔋 Up to 100 km per Charge",
+                "🛠 Low Maintenance Design",
+                "💰 Higher Daily Earnings",
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="rounded-lg px-4 py-3 text-sm
+          text-white
+          bg-black/50 backdrop-blur
+          border border-white/15
+          hover:border-cyan-400
+          hover:shadow-[0_0_18px_rgba(34,211,238,0.4)]
+          transition"
+                >
+                  {item}
+                </div>
+              ))}
             </div>
           </div>
         </motion.div>
@@ -129,14 +156,21 @@ const HeroLanding = () => {
           />
 
           {/* CTA RING */}
-          <div className="absolute -right-6 top-1/2 -translate-y-1/2">
-            <div className="relative w-32 h-32 rounded-full border border-cyan-400/40 flex items-center justify-center backdrop-blur">
-              <div className="absolute inset-0 rounded-full border-2 border-cyan-400 animate-ping opacity-30" />
-              <button className="text-sm font-semibold text-cyan-300 hover:text-white transition">
-                Book a<br />
-                Test Drive
-              </button>
-            </div>
+          {/* ================= BOOK NOW CTA ================= */}
+          <div className="absolute -bottom-16 left-1/2 -translate-x-1/2">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="
+      relative px-10 py-4 rounded-full
+      bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500
+      text-white font-semibold tracking-wide
+      shadow-[0_20px_60px_rgba(59,130,246,0.6)]
+      border border-white/20
+    "
+            >
+              Book a Test Drive
+            </motion.button>
           </div>
         </motion.div>
       </div>

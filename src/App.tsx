@@ -1,7 +1,7 @@
 // src/App.tsx
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
-import ProductsPage from "./pages/Products";
+import ProductsPage from "./pages/products";
 import About from "./pages/About";
 import ContactUs from "./pages/ContactUs";
 import NotFound from "./pages/NotFound";

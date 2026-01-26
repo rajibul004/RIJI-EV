@@ -44,15 +44,23 @@ All colors MUST be HSL.
     --electric-blue: 218 100% 60%;
     --electric-blue-dark: 218 100% 45%;
     --section-padding: 4rem;
-    
+
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(var(--dark-surface)), hsl(218 25% 12%));
-    --gradient-accent: linear-gradient(135deg, hsl(var(--electric-blue)), hsl(var(--electric-blue-dark)));
-    
+    --gradient-hero: linear-gradient(
+      135deg,
+      hsl(var(--dark-surface)),
+      hsl(218 25% 12%)
+    );
+    --gradient-accent: linear-gradient(
+      135deg,
+      hsl(var(--electric-blue)),
+      hsl(var(--electric-blue-dark))
+    );
+
     /* Shadows */
     --shadow-electric: 0 10px 30px -10px hsl(var(--electric-blue) / 0.3);
     --shadow-product: 0 20px 40px -15px hsl(0 0% 0% / 0.15);
-    
+
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -120,4 +128,12 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.feature-box {
+  @apply px-4 py-3 rounded-xl 
+  bg-white/10 backdrop-blur 
+  border border-white/20 
+  text-sm font-medium text-gray-100 
+  hover:bg-white/20 transition;
 }

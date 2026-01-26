@@ -2,6 +2,8 @@ import React from "react";
 import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 import { FiMapPin, FiPhone, FiMail, FiClock } from "react-icons/fi";
 import logo from "../assets/logo.png";
+import { Link } from "react-router-dom";
+
 
 const Footer: React.FC = () => {
   const scrollToTop = (): void => {
@@ -123,7 +125,7 @@ const Footer: React.FC = () => {
           <ul className="space-y-2">
             <li>
               <a
-                href="#"
+                href="/products"
                 className="text-gray-300 hover:text-white transition-all duration-300 group inline-block"
               >
                 <span className="border-b border-transparent group-hover:border-green-400 pb-1">

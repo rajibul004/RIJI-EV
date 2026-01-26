@@ -44,7 +44,7 @@ const ContactForm = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:8080/api/enquiries", {
+      const res = await fetch("https://riji-ev-backend.onrender.com/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

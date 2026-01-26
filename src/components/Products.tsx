@@ -57,30 +57,45 @@ const ProductCard = ({ product, index }: any) => {
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
-      className={`flex flex-col lg:flex-row gap-6 items-center border border-gray-200 rounded-3xl p-6 bg-white shadow-md hover:shadow-xl ${
-        index % 2 !== 0 ? "lg:flex-row-reverse" : ""
-      }`}
+      className={`flex flex-col lg:flex-row gap-8 items-center
+  rounded-3xl p-7
+  bg-white/60 backdrop-blur-xl
+  border border-white/60
+  shadow-[0_30px_80px_rgba(0,0,0,0.08)]
+  hover:shadow-[0_40px_120px_rgba(16,185,129,0.25)]
+  transition-all duration-300
+  ${index % 2 !== 0 ? "lg:flex-row-reverse" : ""}`}
     >
       {/* Image */}
       <motion.div
         whileHover={{ scale: 1.04 }}
         transition={{ duration: 0.5 }}
-        className="lg:w-1/2 w-full overflow-hidden rounded-2xl"
+        className="lg:w-1/2 w-full rounded-3xl
+bg-white/70 backdrop-blur
+border border-white/60
+flex items-center justify-center p-8
+shadow-[0_25px_60px_rgba(0,0,0,0.12)]"
       >
         <img
           src={product.image}
           alt={product.name}
-          className="w-full h-[360px] object-cover"
+          className="w-full h-[360px] object-contain drop-shadow-xl"
         />
       </motion.div>
 
       {/* Info */}
       <div className="lg:w-1/2 space-y-4">
         <motion.div variants={itemVariants}>
-          <p className="text-xs font-semibold uppercase text-gray-500">
+          <p
+            className="text-xs font-semibold uppercase tracking-widest
+  text-emerald-600"
+          >
             {product.categoryLabel}
           </p>
-          <h2 className="text-3xl font-bold text-gray-900">
+          <h2
+            className="text-4xl font-extrabold tracking-tight
+  text-gray-900 drop-shadow-sm"
+          >
             {product.name}
           </h2>
         </motion.div>
@@ -96,18 +111,30 @@ const ProductCard = ({ product, index }: any) => {
         </motion.div>
 
         {/* Features */}
-        <motion.div variants={itemVariants}>
-          <h3 className="text-sm font-bold uppercase mb-2">
-            Key Features
-          </h3>
-          <div className="grid grid-cols-2 gap-2">
-            {product.features.map((f: string, i: number) => (
-              <p key={i} className="text-sm flex items-center gap-2">
-                <span className="w-2 h-2 bg-emerald-600 rounded-full" />
-                {f}
-              </p>
-            ))}
-          </div>
+        <motion.div variants={itemVariants} className="space-y-4">
+          <h3 className="text-sm font-bold uppercase">Key Features</h3>
+
+          {product.features.map(
+            (section: { title: string; items: string[] }, idx: number) => (
+              <div key={idx}>
+                <p className="text-sm font-semibold text-gray-800 mb-1">
+                  {section.title}
+                </p>
+
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {section.items.map((item, i) => (
+                    <li
+                      key={i}
+                      className="text-sm flex items-start gap-2 text-gray-700"
+                    >
+                      <span className="mt-1 w-2 h-2 bg-emerald-600 rounded-full shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ),
+          )}
         </motion.div>
 
         {/* Colors */}
@@ -155,9 +182,9 @@ const ProductCard = ({ product, index }: any) => {
             onClick={() =>
               window.open(
                 `https://wa.me/919876543210?text=${encodeURIComponent(
-                  `Hi RIJI EV! I'm interested in the ${product.name} in ${selectedColor} color. Please share price, availability and test ride details.`
+                  `Hi RIJI EV! I'm interested in the ${product.name} in ${selectedColor} color. Please share price, availability and test ride details.`,
                 )}`,
-                "_blank"
+                "_blank",
               )
             }
           >
@@ -179,7 +206,16 @@ const ProductsPage = () => {
       : allProducts.filter((p) => p.category === activeFilter);
 
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div
+      className="relative min-h-screen overflow-hidden
+  bg-gradient-to-br from-slate-50 via-emerald-50/60 to-white"
+    >
+      {/* AI Glow Orbs */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-20 left-20 w-[420px] h-[420px] bg-emerald-400/25 blur-[140px] rounded-full" />
+        <div className="absolute bottom-20 right-32 w-[520px] h-[520px] bg-cyan-400/25 blur-[160px] rounded-full" />
+      </div>
+
       {/* Filters */}
       <section className="border-b bg-white py-4">
         <div className="flex justify-center gap-3">
