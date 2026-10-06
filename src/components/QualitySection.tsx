@@ -1,188 +1,171 @@
-import { Award, Clock, Sparkles } from "lucide-react";
-import { motion } from "framer-motion";
-import type { Variants } from "framer-motion";
+import React from "react";
+import rijiVehicle from "@/assets/scooter.png";
 
-/* ================= ANIMATIONS ================= */
-const container: Variants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.18, delayChildren: 0.25 },
-  },
+type RijiEvAboutProps = {
+  cta?: {
+    label: string;
+    href: string;
+  };
 };
 
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 28 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+const RijiEvAbout: React.FC<RijiEvAboutProps> = ({
+  cta = {
+    label: "Explore Vehicles",
+    href: "#vehicles",
   },
-};
-
-const floatSlow: Variants = {
-  animate: {
-    y: [0, -8, 0],
-    transition: {
-      duration: 6,
-      repeat: Infinity,
-      ease: [0.4, 0, 0.2, 1],
-    },
-  },
-};
-
-/* ================= DATA ================= */
-const features = [
-  {
-    icon: Sparkles,
-    title: "Premium-Grade Construction",
-    description:
-      "High-strength chassis and reinforced body engineered for Indian road conditions.",
-  },
-  {
-    icon: Award,
-    title: "Intelligent EV Engineering",
-    description:
-      "Efficient motors, smart battery protection, and optimized power delivery.",
-  },
-  {
-    icon: Clock,
-    title: "Reliable Service & Support",
-    description:
-      "24/7 assistance with a growing nationwide service and spare network.",
-  },
-];
-
-const stats = [
-  { value: "NO.1", label: "Trusted E-Rickshaw Brand" },
-  { value: "50+", label: "Years of Experience" },
-  { value: "10K+", label: "Vehicles on Road" },
-  { value: "8+", label: "Industry Awards" },
-];
-
-/* ================= SECTION ================= */
-const QualitySectionSafe = () => {
+}) => {
   return (
-    <section
-      className="relative min-h-screen overflow-hidden flex items-center
-      bg-gradient-to-br from-sky-50 via-cyan-50 to-white"
-    >
-      {/* ===== AI GLOW BACKGROUND ===== */}
-      <div className="absolute inset-0 -z-10">
-        <div
-          className="absolute top-[-120px] left-[-120px]
-          w-[420px] h-[420px] bg-cyan-400/30 blur-[160px] rounded-full"
-        />
-        <div
-          className="absolute bottom-[-120px] right-[-80px]
-          w-[480px] h-[480px] bg-blue-400/30 blur-[180px] rounded-full"
-        />
-        <div className="absolute inset-0 bg-white/40 backdrop-blur-3xl" />
-      </div>
+    <section className="min-h-screen bg-white text-slate-900">
+      <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-6 py-8 lg:px-10">
+        {/* HEADER */}
+        <header className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-950 text-sm font-bold text-white">
+              R
+            </div>
 
-      <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-        className="relative max-w-7xl mx-auto px-6 w-full"
-      >
-        <div className="grid lg:grid-cols-2 gap-14 items-center">
-          {/* ================= LEFT ================= */}
-          <motion.div variants={fadeUp} className="max-w-xl space-y-6">
-            <span
-              className="inline-block px-5 py-2 rounded-full
-              bg-white/70 backdrop-blur-xl
-              border border-cyan-200/60
-              text-cyan-700 text-xs tracking-widest uppercase font-semibold"
-            >
-              Why RIJI EV
-            </span>
+            <div>
+              <div className="text-lg font-bold tracking-[0.18em] text-slate-950">
+                RIJI EV
+              </div>
 
-            <h2 className="text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
-              Classic Manufacturing
-              <br />
-              <span
-                className="bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600
-                bg-clip-text text-transparent"
-              >
-                Powered by Modern EV Innovation
+              <div className="text-[9px] font-medium uppercase tracking-[0.25em] text-slate-400">
+                Electric Mobility
+              </div>
+            </div>
+          </div>
+
+          <a
+            href={cta.href}
+            className="hidden rounded-full border border-slate-200 px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:border-blue-200 hover:text-blue-600 sm:block"
+          >
+            {cta.label}
+          </a>
+        </header>
+
+        {/* MAIN */}
+        <main className="grid flex-1 items-center gap-12 py-10 lg:grid-cols-[1fr_0.9fr] lg:gap-20">
+          {/* IMAGE */}
+          <div className="flex items-center justify-center lg:justify-start">
+            <img
+              src={rijiVehicle}
+              alt="RIJI EV electric vehicle"
+              className="w-full max-w-[620px] object-contain"
+              fetchPriority="high"
+              decoding="async"
+            />
+          </div>
+
+          {/* CONTENT */}
+          <div className="max-w-xl">
+            {/* EYEBROW */}
+            <div className="mb-5 flex items-center gap-3">
+              <span className="h-px w-8 bg-blue-600" />
+
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-600">
+                About RIJI EV
               </span>
-            </h2>
+            </div>
 
-            <p className="text-gray-600 text-lg leading-relaxed">
-              RIJI EV combines decades of manufacturing expertise with modern
-              electric vehicle technology to deliver safe, durable, and
-              future-ready mobility solutions.
+            {/* TITLE */}
+            <h1 className="text-5xl font-semibold leading-[1.02] tracking-[-0.045em] text-slate-950 sm:text-6xl">
+              Electric mobility.
+              <br />
+              <span className="text-blue-600">Built for India.</span>
+            </h1>
+
+            {/* DESCRIPTION */}
+            <p className="mt-6 max-w-lg text-base leading-7 text-slate-500 sm:text-lg">
+              RIJI EV is focused on building smart, reliable and accessible
+              electric vehicles designed for the needs of everyday Indian
+              mobility.
             </p>
 
-            {/* ===== STATS ===== */}
-            <div className="grid grid-cols-2 gap-4 pt-4">
-              {stats.map((s, i) => (
-                <motion.div
-                  key={i}
-                  variants={fadeUp}
-                  whileHover={{ y: -6 }}
-                  className="rounded-2xl p-5 text-center
-                  bg-white/70 backdrop-blur-xl
-                  border border-white/60
-                  shadow-[0_20px_50px_rgba(0,0,0,0.12)]"
-                >
-                  <div
-                    className="text-2xl font-extrabold
-                    bg-gradient-to-r from-cyan-600 to-blue-600
-                    bg-clip-text text-transparent"
-                  >
-                    {s.value}
-                  </div>
-                  <p className="text-xs font-semibold text-gray-600 mt-1">
-                    {s.label}
+            {/* FEATURES */}
+            <div className="mt-8 space-y-5">
+              {/* Feature 1 */}
+              <div className="flex items-start gap-4">
+                <span className="mt-1 text-xs font-semibold text-blue-600">
+                  01
+                </span>
+
+                <div>
+                  <h3 className="font-semibold text-slate-900">
+                    Practical Vehicle Design
+                  </h3>
+
+                  <p className="mt-1 text-sm leading-6 text-slate-500">
+                    Modern electric vehicles designed for everyday Indian roads.
                   </p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* ================= RIGHT ================= */}
-          <motion.div className="grid gap-6">
-            {features.map((f, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                animate="animate"
-                {...floatSlow}
-                whileHover={{ scale: 1.04 }}
-                className="rounded-3xl p-6
-                bg-white/80 backdrop-blur-2xl
-                border border-white/70
-                shadow-[0_30px_80px_rgba(0,0,0,0.15)]"
-              >
-                <div className="flex items-start gap-4">
-                  <div
-                    className="w-14 h-14 rounded-2xl
-                    bg-gradient-to-br from-cyan-600 to-blue-600
-                    flex items-center justify-center text-white shrink-0
-                    shadow-[0_10px_30px_rgba(59,130,246,0.5)]"
-                  >
-                    <f.icon className="w-6 h-6" />
-                  </div>
-
-                  <div>
-                    <h4 className="text-lg font-bold text-gray-900 mb-1">
-                      {f.title}
-                    </h4>
-                    <p className="text-sm text-gray-600 leading-relaxed">
-                      {f.description}
-                    </p>
-                  </div>
                 </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </motion.div>
+              </div>
+
+              {/* Feature 2 */}
+              <div className="flex items-start gap-4">
+                <span className="mt-1 text-xs font-semibold text-blue-600">
+                  02
+                </span>
+
+                <div>
+                  <h3 className="font-semibold text-slate-900">
+                    Efficient EV Technology
+                  </h3>
+
+                  <p className="mt-1 text-sm leading-6 text-slate-500">
+                    Efficient technology focused on practical real-world
+                    mobility.
+                  </p>
+                </div>
+              </div>
+
+              {/* Feature 3 */}
+              <div className="flex items-start gap-4">
+                <span className="mt-1 text-xs font-semibold text-blue-600">
+                  03
+                </span>
+
+                <div>
+                  <h3 className="font-semibold text-slate-900">
+                    Customer First
+                  </h3>
+
+                  <p className="mt-1 text-sm leading-6 text-slate-500">
+                    Reliable support throughout the ownership journey.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* BUTTONS */}
+            <div className="mt-9 flex flex-wrap gap-4">
+              <a
+                href="#vehicles"
+                className="rounded-full bg-slate-950 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-blue-600"
+              >
+                Explore Vehicles
+              </a>
+
+              <a
+                href="#contact"
+                className="rounded-full px-7 py-3.5 text-sm font-semibold text-slate-600 transition-colors hover:text-blue-600"
+              >
+                Contact Us →
+              </a>
+            </div>
+          </div>
+        </main>
+
+        {/* BOTTOM */}
+        <footer className="flex items-center justify-between border-t border-slate-100 py-5 text-xs text-slate-400">
+          <span>Electric mobility for everyday India.</span>
+
+          <span className="hidden sm:block">
+            Smart technology · Practical design
+          </span>
+        </footer>
+      </div>
     </section>
   );
 };
 
-export default QualitySectionSafe;
+export default RijiEvAbout;

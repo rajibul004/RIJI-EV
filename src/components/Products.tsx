@@ -1,280 +1,365 @@
-import React, { useState } from "react";
-import { ChevronRight } from "lucide-react";
-import { products as allProducts } from "../components/ProductsData";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import type { Variants } from "framer-motion";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
-const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER;
+import { products } from "../components/ProductsData";
 
-interface Spec {
-  label: string;
-  value: string;
-  Icon: React.ElementType;
-}
+const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER || "918617616397";
 
-interface FeatureSection {
-  title: string;
-  items: string[];
-}
+type FilterType = "all" | "scooty" | "toto";
 
-interface Product {
-  id: number;
-  name: string;
-  category: string;
-  categoryLabel: string;
-  price: number;
-  image: string;
-  specs: Spec[];
-  features: FeatureSection[];
-  colors: string[];
-}
+export default function ProductsPage() {
+  const [activeFilter, setActiveFilter] = useState<FilterType>("all");
 
-/* -------------------- Animations -------------------- */
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 12 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.35,
-      ease: [0.16, 1, 0.3, 1],
-    },
-  },
-};
+  const filteredProducts = useMemo(() => {
+    if (activeFilter === "all") return products;
 
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1],
-      staggerChildren: 0.08,
-    },
-  },
-};
+    return products.filter((product) => {
+      const category = product.category.toLowerCase();
 
-/* -------------------- Specs Item -------------------- */
-const SpecItem = ({ label, value, Icon }: Spec) => {
-  return (
-    <motion.div
-      variants={itemVariants}
-      whileHover={{ scale: 1.06 }}
-      className="text-center bg-gray-50 rounded-xl py-3"
-    >
-      <Icon className="w-6 h-6 mx-auto mb-1 text-emerald-600" />
-      <p className="text-xs text-gray-500">{label}</p>
-      <p className="font-semibold text-gray-900 text-sm">{value}</p>
-    </motion.div>
-  );
-};
+      if (activeFilter === "scooty") {
+        return category.includes("scoot") || category.includes("scooter");
+      }
 
-/* -------------------- Product Card -------------------- */
-const ProductCard = ({
-  product,
-  index,
-}: {
-  product: Product;
-  index: number;
-}) => {
-  const [selectedColor, setSelectedColor] = useState<string>(product.colors[0]);
+      if (activeFilter === "toto") {
+        return (
+          category.includes("toto") ||
+          category.includes("rickshaw") ||
+          category.includes("e-rickshaw")
+        );
+      }
+
+      return true;
+    });
+  }, [activeFilter]);
+
+  const getWhatsAppLink = (productName: string) => {
+    const message = `Hello RIJI EV, I am interested in ${productName}. Please share more details.`;
+
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+      message,
+    )}`;
+  };
 
   return (
-    <motion.div
-      variants={cardVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
-      className={`flex flex-col lg:flex-row gap-8 items-center
-  rounded-3xl p-7
-  bg-white/60 backdrop-blur-xl
-  border border-white/60
-  shadow-[0_30px_80px_rgba(0,0,0,0.08)]
-  hover:shadow-[0_40px_120px_rgba(16,185,129,0.25)]
-  transition-all duration-300
-  ${index % 2 !== 0 ? "lg:flex-row-reverse" : ""}`}
-    >
-      {/* Image */}
-      <motion.div
-        whileHover={{ scale: 1.04 }}
-        transition={{ duration: 0.5 }}
-        className="lg:w-1/2 w-full rounded-3xl
-bg-white/70 backdrop-blur
-border border-white/60
-flex items-center justify-center p-8
-shadow-[0_25px_60px_rgba(0,0,0,0.12)]"
-      >
-        <img
-          src={product.image}
-          alt={product.name}
-          loading="lazy"
-          decoding="async"
-        />
-      </motion.div>
+    <main className="min-h-screen bg-[#F5F1E8] text-[#171717]">
+      {/* =====================================================
+          PAGE HEADER
+      ===================================================== */}
+      <section className="border-b border-[#D8D0C2]">
+        <div className="mx-auto max-w-[1450px] px-6 pb-8 pt-28 sm:px-10 lg:px-16 lg:pb-10 lg:pt-36">
+          <div className="flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
+            {/* Heading */}
+            <div>
+              <div className="mb-3 flex items-center gap-3">
+                <span className="h-px w-8 bg-[#B08A4A]" />
 
-      {/* Info */}
-      <div className="lg:w-1/2 space-y-4">
-        <motion.div variants={itemVariants}>
-          <p
-            className="text-xs font-semibold uppercase tracking-widest
-  text-emerald-600"
-          >
-            {product.categoryLabel}
-          </p>
-          <h2
-            className="text-4xl font-extrabold tracking-tight
-  text-gray-900 drop-shadow-sm"
-          >
-            {product.name}
-          </h2>
-        </motion.div>
-
-        {/* Specs */}
-        <motion.div
-          variants={itemVariants}
-          className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-3 border-t"
-        >
-          {product.specs.map((spec: Spec, i: number) => (
-            <SpecItem key={i} {...spec} />
-          ))}
-        </motion.div>
-
-        {/* Features */}
-        <motion.div variants={itemVariants} className="space-y-4">
-          <h3 className="text-sm font-bold uppercase">Key Features</h3>
-
-          {product.features.map(
-            (section: { title: string; items: string[] }, idx: number) => (
-              <div key={idx}>
-                <p className="text-sm font-semibold text-gray-800 mb-1">
-                  {section.title}
-                </p>
-
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {section.items.map((item, i) => (
-                    <li
-                      key={i}
-                      className="text-sm flex items-start gap-2 text-gray-700"
-                    >
-                      <span className="mt-1 w-2 h-2 bg-emerald-600 rounded-full shrink-0" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                <span className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#8A8174]">
+                  RIJI ELECTRIC
+                </span>
               </div>
-            ),
-          )}
-        </motion.div>
 
-        {/* Colors */}
-        <motion.div variants={itemVariants}>
-          <h3 className="text-sm font-bold uppercase mb-2 text-gray-800">
-            Available Colors
-          </h3>
+              <h1 className="font-serif text-5xl leading-[0.95] tracking-[-0.04em] sm:text-6xl lg:text-7xl">
+                Our vehicles.
+              </h1>
 
-          <div className="flex items-center gap-3">
-            {product.colors.map((color: string, idx: number) => (
-              <motion.span
-                key={idx}
-                onClick={() => setSelectedColor(color)}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.95 }}
-                className={`w-7 h-7 rounded-full cursor-pointer border transition
-                  ${
-                    selectedColor === color
-                      ? "ring-2 ring-emerald-600 ring-offset-2"
-                      : "border-gray-300"
-                  }`}
-                style={{ backgroundColor: color }}
-                title={color}
-              />
-            ))}
+              <p className="mt-4 max-w-xl text-sm leading-6 text-[#706B62] sm:text-base">
+                Electric mobility designed for everyday India. Explore the RIJI
+                range.
+              </p>
+            </div>
+
+            {/* Filters */}
+            <div className="flex flex-wrap items-center gap-2">
+              <FilterButton
+                active={activeFilter === "all"}
+                onClick={() => setActiveFilter("all")}
+              >
+                All vehicles
+              </FilterButton>
+
+              <FilterButton
+                active={activeFilter === "scooty"}
+                onClick={() => setActiveFilter("scooty")}
+              >
+                E-Scooters
+              </FilterButton>
+
+              <FilterButton
+                active={activeFilter === "toto"}
+                onClick={() => setActiveFilter("toto")}
+              >
+                E-Rickshaws
+              </FilterButton>
+            </div>
           </div>
-        </motion.div>
+        </div>
+      </section>
 
-        {/* Price + WhatsApp */}
-        <motion.div
-          variants={itemVariants}
-          className="flex justify-between items-center pt-4 border-t"
-        >
-          <div>
-            <p className="text-xs text-gray-600">Starting at</p>
-            <p className="text-2xl font-bold">
-              ₹{product.price.toLocaleString("en-IN")}
+      {/* =====================================================
+          PRODUCT ROWS
+      ===================================================== */}
+      <section className="mx-auto max-w-[1450px] px-6 py-8 sm:px-10 lg:px-16 lg:py-12">
+        <div className="space-y-5">
+          {filteredProducts.map((product, index) => (
+            <ProductRow
+              key={product.id}
+              product={product}
+              index={index}
+              whatsappLink={getWhatsAppLink(product.name)}
+            />
+          ))}
+        </div>
+
+        {filteredProducts.length === 0 && (
+          <div className="border border-[#D8D0C2] py-20 text-center">
+            <p className="text-sm text-[#706B62]">
+              No vehicles found in this category.
             </p>
           </div>
-
-          <motion.button
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            className="bg-green-600 text-white px-6 py-3 rounded-xl text-sm font-medium flex items-center gap-2 hover:bg-green-700 transition"
-            onClick={() =>
-              window.open(
-                `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                  `Hi RIJI EV! I'm interested in the ${product.name} in ${selectedColor} color. Please share price, availability and test ride details.`,
-                )}`,
-                "_blank",
-              )
-            }
-          >
-            WhatsApp <ChevronRight size={16} />
-          </motion.button>
-        </motion.div>
-      </div>
-    </motion.div>
+        )}
+      </section>
+    </main>
   );
-};
+}
 
-/* -------------------- Products Page -------------------- */
-const ProductsPage = () => {
-  const [activeFilter, setActiveFilter] = useState("all");
+/* =========================================================
+   PRODUCT ROW
+========================================================= */
 
-  const filteredProducts =
-    activeFilter === "all"
-      ? allProducts
-      : allProducts.filter((p) => p.category === activeFilter);
-
+function ProductRow({
+  product,
+  index,
+  whatsappLink,
+}: {
+  product: (typeof products)[number];
+  index: number;
+  whatsappLink: string;
+}) {
   return (
-    <div
-      className="relative min-h-screen overflow-hidden
-  bg-gradient-to-br from-slate-50 via-emerald-50/60 to-white"
+    <motion.article
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{
+        duration: 0.55,
+        delay: index * 0.05,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="
+        group
+        relative
+        overflow-hidden
+        border
+        border-[#D8D0C2]
+        bg-[#F8F5EF]
+        transition-colors
+        duration-500
+        hover:border-[#B9A98D]
+      "
     >
-      {/* AI Glow Orbs */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-20 left-20 w-[420px] h-[420px] bg-emerald-400/25 blur-[140px] rounded-full" />
-        <div className="absolute bottom-20 right-32 w-[520px] h-[520px] bg-cyan-400/25 blur-[160px] rounded-full" />
-      </div>
+      <div className="grid min-h-[390px] grid-cols-1 lg:grid-cols-[42%_58%]">
+        {/* =================================================
+            LEFT — PRODUCT INFORMATION
+        ================================================= */}
+        <div className="relative flex flex-col justify-between p-7 sm:p-9 lg:p-11">
+          {/* Product number */}
+          <div className="flex items-center justify-between">
+            <span className="font-mono text-[11px] tracking-[0.18em] text-[#9A9184]">
+              {String(index + 1).padStart(2, "0")}
+            </span>
 
-      {/* Filters */}
-      <section className="border-b bg-white py-4">
-        <div className="flex justify-center gap-3">
-          {["all", "scooty", "toto"].map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveFilter(cat)}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition ${
-                activeFilter === cat
-                  ? "bg-emerald-600 text-white"
-                  : "border bg-white hover:bg-emerald-50"
-              }`}
+            <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#9A9184]">
+              {product.categoryLabel}
+            </span>
+          </div>
+
+          {/* Main content */}
+          <div className="my-12">
+            <p className="mb-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-[#B08A4A]">
+              RIJI ELECTRIC
+            </p>
+
+            <h2 className="font-serif text-4xl leading-none tracking-[-0.035em] sm:text-5xl lg:text-[58px]">
+              {product.name}
+            </h2>
+
+            <p className="mt-5 max-w-sm text-sm leading-6 text-[#706B62]">
+              {product.categoryLabel} built for comfortable, practical everyday
+              mobility.
+            </p>
+
+            <div className="mt-7">
+              <span className="block text-[10px] font-medium uppercase tracking-[0.2em] text-[#91887A]">
+                Starting from
+              </span>
+
+              <span className="mt-1 block text-xl font-medium tracking-[-0.02em]">
+                ₹{product.price.toLocaleString("en-IN")}
+              </span>
+            </div>
+          </div>
+
+          {/* Actions */}
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              to={`/products/${product.id}`}
+              className="
+                inline-flex
+                h-11
+                items-center
+                gap-3
+                bg-[#171717]
+                px-5
+                text-xs
+                font-semibold
+                uppercase
+                tracking-[0.12em]
+                text-white
+                transition-all
+                duration-300
+                hover:bg-[#B08A4A]
+              "
             >
-              {cat.toUpperCase()}
-            </button>
-          ))}
-        </div>
-      </section>
+              Explore
+              <ArrowUpRight size={15} strokeWidth={1.8} />
+            </Link>
 
-      {/* Products */}
-      <section className="px-6 py-10">
-        <div className="max-w-7xl mx-auto space-y-16">
-          {filteredProducts.map((product, index) => (
-            <ProductCard key={product.id} product={product} index={index} />
-          ))}
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+                inline-flex
+                h-11
+                items-center
+                gap-3
+                border
+                border-[#CFC5B5]
+                px-5
+                text-xs
+                font-semibold
+                uppercase
+                tracking-[0.12em]
+                text-[#292722]
+                transition-all
+                duration-300
+                hover:border-[#171717]
+              "
+            >
+              Enquire
+              <ArrowRight size={15} strokeWidth={1.8} />
+            </a>
+          </div>
         </div>
-      </section>
-    </div>
+
+        {/* =================================================
+            RIGHT — PRODUCT IMAGE
+            ALL PRODUCTS STAY ON RIGHT
+        ================================================= */}
+        <div
+          className="
+            relative
+            flex
+            min-h-[300px]
+            items-center
+            justify-center
+            overflow-hidden
+            border-t
+            border-[#D8D0C2]
+            bg-[#F1ECE2]
+            lg:min-h-[390px]
+            lg:border-l
+            lg:border-t-0
+          "
+        >
+          {/* Small category label */}
+          <div className="absolute right-6 top-6 z-10 sm:right-8 sm:top-8">
+            <span className="text-[9px] font-semibold uppercase tracking-[0.24em] text-[#9A9184]">
+              {product.category}
+            </span>
+          </div>
+
+          {/* Image */}
+          <motion.img
+            src={product.image}
+            alt={product.name}
+            loading={index > 1 ? "lazy" : "eager"}
+            className="
+              relative
+              z-[2]
+              max-h-[270px]
+              w-[82%]
+              object-contain
+              transition-transform
+              duration-700
+              ease-out
+              group-hover:scale-[1.04]
+              sm:max-h-[310px]
+              lg:max-h-[340px]
+              lg:w-[78%]
+            "
+          />
+
+          {/* Very subtle floor line */}
+          <div
+            className="
+              absolute
+              bottom-12
+              left-[12%]
+              right-[12%]
+              h-px
+              bg-[#D4CABB]
+            "
+          />
+
+          {/* Product number */}
+          <div className="absolute bottom-5 right-6 sm:right-8">
+            <span className="font-serif text-5xl leading-none text-[#DED6C8] sm:text-6xl">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+          </div>
+        </div>
+      </div>
+    </motion.article>
   );
-};
+}
 
-export default ProductsPage;
+/* =========================================================
+   FILTER BUTTON
+========================================================= */
+
+function FilterButton({
+  active,
+  children,
+  onClick,
+}: {
+  active: boolean;
+  children: React.ReactNode;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`
+        h-10
+        border
+        px-4
+        text-[10px]
+        font-semibold
+        uppercase
+        tracking-[0.14em]
+        transition-all
+        duration-300
+        ${
+          active
+            ? "border-[#171717] bg-[#171717] text-white"
+            : "border-[#D8D0C2] bg-transparent text-[#6F695F] hover:border-[#AFA391] hover:text-[#171717]"
+        }
+      `}
+    >
+      {children}
+    </button>
+  );
+}

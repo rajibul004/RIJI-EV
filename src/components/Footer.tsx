@@ -1,246 +1,317 @@
-import React from "react";
-import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
-import { FiMapPin, FiPhone, FiMail, FiClock } from "react-icons/fi";
-import logo from "../assets/logo.png";
+import { ArrowUpRight, Instagram, Facebook, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
 
-
-const Footer: React.FC = () => {
-  const scrollToTop = (): void => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+const Footer = () => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
-    <footer className="relative bg-gradient-to-br from-slate-900 via-gray-900 to-black text-white pt-16 pb-8 px-6 md:px-20 overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full blur-3xl animate-pulse" />
-        <div
-          className="absolute bottom-20 right-20 w-48 h-48 bg-gradient-to-r from-green-400 to-blue-500 rounded-full blur-3xl animate-pulse"
-          style={{ animationDelay: "1s" }}
-        />
-        <div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-3xl animate-pulse"
-          style={{ animationDelay: "2s" }}
-        />
-      </div>
+    <footer className="bg-[#F4EFE5] text-[#171717]">
+      {/* =========================
+          CTA
+      ========================== */}
+      <section className="px-5 pb-8 pt-10 sm:px-8 lg:px-12">
+        <div className="group relative mx-auto max-w-7xl overflow-hidden rounded-[36px] bg-[#171717] px-7 py-12 sm:px-12 sm:py-14 lg:px-20 lg:py-16">
+          {/* Gold shape */}
+          <div
+            className="
+              absolute
+              -right-24
+              -top-24
+              h-72
+              w-72
+              rounded-full
+              bg-[#C5A46D]/20
+              blur-[2px]
+              transition-transform
+              duration-1000
+              group-hover:scale-125
+            "
+          />
 
-      {/* Grid Overlay */}
-      <div
-        className="absolute inset-0 opacity-5"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
-          backgroundSize: "50px 50px",
-        }}
-      />
+          {/* Gold ring */}
+          <div
+            className="
+              absolute
+              -bottom-28
+              -right-8
+              h-64
+              w-64
+              rounded-full
+              border
+              border-[#C5A46D]/30
+              transition-transform
+              duration-1000
+              group-hover:rotate-45
+            "
+          />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10 text-sm text-white">
-        {/* Logo & Description */}
-        <div className="space-y-4">
-          <div className="flex items-center space-x-3">
-            <div className=" rounded-xl flex items-center justify-center transition-transform hover:scale-105">
-              <img
-                src={logo}
-                alt="Riji EV Logo"
-                className="w-8 h-8 object-contain"
-              />
-            </div>
-            <div>
-              <h2 className="text-xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
-                RIJI EV
-              </h2>
-              <p className="text-xs text-gray-400">Electric Vehicles</p>
-            </div>
-          </div>
-          <p className="text-gray-300 leading-relaxed">
-            RIJI EV is a leading electric vehicle manufacturer in India,
-            specializing in electric rickshaws, e-carts, and other sustainable
-            mobility solutions.
-          </p>
+          {/* Small accent */}
+          <div className="absolute left-0 top-0 h-full w-1 bg-[#C5A46D]" />
 
-          {/* Social Icons */}
-          <div className="flex space-x-3 pt-2">
-            <a
-              href="#"
-              className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:scale-110 hover:bg-blue-600 transition-all duration-300"
+          <div className="relative z-10 max-w-3xl">
+            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-[#C5A46D]">
+              RIJI EV
+            </p>
+
+            <h2 className="max-w-2xl text-[42px] font-medium leading-[0.95] tracking-[-0.045em] text-white sm:text-[54px] lg:text-[68px]">
+              Ready to move
+              <br />
+              <span className="text-[#C5A46D]">differently?</span>
+            </h2>
+
+            <p className="mt-5 max-w-lg text-sm leading-6 text-white/60 sm:text-base">
+              Discover practical electric mobility designed for everyday India.
+            </p>
+
+            <Link
+              to="/products"
+              className="
+                mt-7
+                inline-flex
+                items-center
+                gap-3
+                rounded-full
+                bg-[#F4EFE5]
+                px-6
+                py-3
+                text-sm
+                font-semibold
+                text-[#171717]
+                transition-all
+                duration-300
+                hover:bg-[#C5A46D]
+                hover:text-white
+              "
             >
-              <FaFacebookF className="text-blue-400" />
-            </a>
-            <a
-              href="#"
-              className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:scale-110 hover:bg-pink-600 transition-all duration-300"
-            >
-              <FaInstagram className="text-pink-400" />
-            </a>
-            <a
-              href="#"
-              className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:scale-110 hover:bg-blue-400 transition-all duration-300"
-            >
-              <FaYoutube className="text-red-400" />
-            </a>
+              Explore Vehicles
+              <ArrowUpRight size={16} />
+            </Link>
           </div>
         </div>
+      </section>
 
-        {/* Contact Info */}
-        <div>
-          <h3 className="text-lg font-semibold mb-4 text-white relative">
-            Contact Information
-            <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-green-400 to-blue-500 rounded-full" />
-          </h3>
-          <div className="space-y-3">
-            <div className="flex items-start space-x-2 group">
-              <FiMapPin className="text-green-400 mt-1 group-hover:scale-110 transition-transform" />
-              <p className="text-gray-300 leading-relaxed">
-                Fancy Market 2nd Floor, Tinkonia Bus Stand,
-                <br />
-                Bardhaman, West Bengal, 713101, India
+      {/* =========================
+          MAIN FOOTER
+      ========================== */}
+      <section className="bg-[#171717] px-6 py-10 text-white sm:px-10 lg:px-14">
+        <div className="mx-auto max-w-7xl">
+          {/* Top row */}
+          <div className="grid gap-10 border-b border-white/10 pb-10 md:grid-cols-[1.5fr_1fr_1fr]">
+            {/* Brand */}
+            <div>
+              <Link
+                to="/"
+                onClick={scrollToTop}
+                className="inline-block text-2xl font-semibold tracking-[-0.04em]"
+              >
+                RIJI <span className="text-[#C5A46D]">EV</span>
+              </Link>
+
+              <p className="mt-4 max-w-sm text-sm leading-6 text-white/55">
+                Electric mobility built for real journeys, real roads and
+                everyday India.
+              </p>
+
+              <p className="mt-5 text-[11px] uppercase tracking-[0.2em] text-white/35">
+                RIJIYA PVT. LTD.
               </p>
             </div>
-            <div className="flex items-center space-x-2 group hover:text-green-400 transition-colors cursor-pointer">
-              <FiPhone className="text-green-400 group-hover:scale-110 transition-transform" />
-              <span className="text-gray-300">+91 86176 16397</span>
+
+            {/* Explore */}
+            <div>
+              <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#C5A46D]">
+                Explore
+              </p>
+
+              <div className="space-y-3">
+                <Link
+                  to="/products"
+                  className="group flex items-center gap-2 text-sm text-white/65 transition-colors hover:text-white"
+                >
+                  Products
+                  <ArrowUpRight
+                    size={14}
+                    className="opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                  />
+                </Link>
+
+                <Link
+                  to="/about"
+                  className="group flex items-center gap-2 text-sm text-white/65 transition-colors hover:text-white"
+                >
+                  About RIJI
+                  <ArrowUpRight
+                    size={14}
+                    className="opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                  />
+                </Link>
+
+                <Link
+                  to="/dealership"
+                  className="group flex items-center gap-2 text-sm text-white/65 transition-colors hover:text-white"
+                >
+                  Dealership
+                  <ArrowUpRight
+                    size={14}
+                    className="opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                  />
+                </Link>
+
+                <Link
+                  to="/contact"
+                  className="group flex items-center gap-2 text-sm text-white/65 transition-colors hover:text-white"
+                >
+                  Contact
+                  <ArrowUpRight
+                    size={14}
+                    className="opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100"
+                  />
+                </Link>
+              </div>
             </div>
-            <div className="flex items-center space-x-2 group hover:text-blue-400 transition-colors cursor-pointer">
-              <FiMail className="text-blue-400 group-hover:scale-110 transition-transform" />
-              <span className="text-gray-300">rijiev@gmail.com</span>
-            </div>
-            <div className="flex items-start space-x-2 group">
-              <FiClock className="text-purple-400 mt-1 group-hover:scale-110 transition-transform" />
-              <div className="text-gray-300">
-                <p>Mon - Sat: 9:00 AM - 6:00 PM</p>
-                <p>Sun: Closed</p>
+
+            {/* Connect */}
+            <div>
+              <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#C5A46D]">
+                Connect
+              </p>
+
+              <div className="space-y-3 text-sm text-white/65">
+                <a
+                  href="mailto:rijiev@gmail.com"
+                  className="block transition-colors hover:text-white"
+                >
+                  rijiev@gmail.com
+                </a>
+
+                <a
+                  href="tel:+918617616397"
+                  className="block transition-colors hover:text-white"
+                >
+                  +91 86176 16397
+                </a>
+
+                <p className="max-w-xs leading-5">
+                  Bardhaman, West Bengal
+                  <br />
+                  India
+                </p>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Products */}
-        <div>
-          <h3 className="text-lg font-semibold mb-4 text-white relative">
-            Products
-            <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-green-400 to-blue-500 rounded-full" />
-          </h3>
-          <ul className="space-y-2">
-            <li>
-              <a
-                href="/products"
-                className="text-gray-300 hover:text-white transition-all duration-300 group inline-block"
-              >
-                <span className="border-b border-transparent group-hover:border-green-400 pb-1">
-                  Explore Products
-                </span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-300 hover:text-white transition-all duration-300 group inline-block"
-              >
-                <span className="border-b border-transparent group-hover:border-green-400 pb-1">
-                  Accessories
-                </span>
-              </a>
-            </li>
-          </ul>
-        </div>
+          {/* Bottom row */}
+          <div className="flex flex-col gap-5 pt-6 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-xs text-white/35">
+              © {new Date().getFullYear()} RIJI EV. All rights reserved.
+            </p>
 
-        {/* Support */}
-        <div>
-          <h3 className="text-lg font-semibold mb-4 text-white relative">
-            Support
-            <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-green-400 to-blue-500 rounded-full" />
-          </h3>
-          <ul className="space-y-2">
-            <li>
+            {/* Social */}
+            <div className="flex items-center gap-2">
               <a
                 href="#"
-                className="text-gray-300 hover:text-white transition-all duration-300 group inline-block"
+                aria-label="Instagram"
+                className="
+                  flex
+                  h-9
+                  w-9
+                  items-center
+                  justify-center
+                  rounded-full
+                  border
+                  border-white/10
+                  text-white/55
+                  transition-all
+                  duration-300
+                  hover:border-[#C5A46D]
+                  hover:bg-[#C5A46D]
+                  hover:text-[#171717]
+                "
               >
-                <span className="border-b border-transparent group-hover:border-blue-400 pb-1">
-                  Connect Support
-                </span>
+                <Instagram size={15} />
               </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-300 hover:text-white transition-all duration-300 group inline-block"
-              >
-                <span className="border-b border-transparent group-hover:border-blue-400 pb-1">
-                  Connect With Us
-                </span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-300 hover:text-white transition-all duration-300 group inline-block"
-              >
-                <span className="border-b border-transparent group-hover:border-blue-400 pb-1">
-                  Facebook
-                </span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-300 hover:text-white transition-all duration-300 group inline-block"
-              >
-                <span className="border-b border-transparent group-hover:border-blue-400 pb-1">
-                  Visit Us
-                </span>
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-300 hover:text-white transition-all duration-300 group inline-block"
-              >
-                <span className="border-b border-transparent group-hover:border-blue-400 pb-1">
-                  FAQ
-                </span>
-              </a>
-            </li>
-          </ul>
-        </div>
 
-        {/* Company */}
-        <div>
-          <h3 className="text-lg font-semibold mb-4 text-white relative">
-            Company
-            <div className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-green-400 to-blue-500 rounded-full" />
-          </h3>
-          <ul className="space-y-2">
-            <li>
               <a
                 href="#"
-                className="text-gray-300 hover:text-white transition-all duration-300 group inline-block"
+                aria-label="Facebook"
+                className="
+                  flex
+                  h-9
+                  w-9
+                  items-center
+                  justify-center
+                  rounded-full
+                  border
+                  border-white/10
+                  text-white/55
+                  transition-all
+                  duration-300
+                  hover:border-[#C5A46D]
+                  hover:bg-[#C5A46D]
+                  hover:text-[#171717]
+                "
               >
-                <span className="border-b border-transparent group-hover:border-purple-400 pb-1">
-                  About Us
-                </span>
+                <Facebook size={15} />
               </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="text-gray-300 hover:text-white transition-all duration-300 group inline-block"
-              >
-                <span className="border-b border-transparent group-hover:border-purple-400 pb-1">
-                  Our Team
-                </span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
 
-      {/* Footer Bottom */}
-      <div className="relative z-10 mt-10 text-center text-xs text-gray-500">
-        © {new Date().getFullYear()} RIJI EV. All rights reserved.
-      </div>
+              <a
+                href="#"
+                aria-label="YouTube"
+                className="
+                  flex
+                  h-9
+                  w-9
+                  items-center
+                  justify-center
+                  rounded-full
+                  border
+                  border-white/10
+                  text-white/55
+                  transition-all
+                  duration-300
+                  hover:border-[#C5A46D]
+                  hover:bg-[#C5A46D]
+                  hover:text-[#171717]
+                "
+              >
+                <Youtube size={15} />
+              </a>
+
+              <button
+                onClick={scrollToTop}
+                aria-label="Back to top"
+                className="
+                  ml-2
+                  flex
+                  h-9
+                  w-9
+                  items-center
+                  justify-center
+                  rounded-full
+                  bg-[#F4EFE5]
+                  text-[#171717]
+                  transition-all
+                  duration-300
+                  hover:bg-[#C5A46D]
+                  hover:text-white
+                "
+              >
+                ↑
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* =========================
+          BOTTOM GOLD LINE
+      ========================== */}
+      <div className="h-[3px] bg-[#C5A46D]" />
     </footer>
   );
 };

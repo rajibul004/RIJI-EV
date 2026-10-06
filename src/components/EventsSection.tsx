@@ -1,241 +1,332 @@
-import { motion } from "framer-motion";
-import type { Variants } from "framer-motion";
+import React from "react";
+import {
+  IndianRupee,
+  Wrench,
+  Leaf,
+  Zap,
+  ArrowUpRight,
+  Check,
+  Gauge,
+} from "lucide-react";
+import { Link } from "react-router-dom";
 
-/* ===================== ANIMATION VARIANTS ===================== */
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.18,
-      delayChildren: 0.25,
-    },
+const benefits = [
+  {
+    number: "01",
+    title: "Lower running cost",
+    description: "Spend less on everyday mobility.",
+    icon: IndianRupee,
   },
-};
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 32 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.85,
-      ease: [0.16, 1, 0.3, 1], // ✅ correct
-    },
+  {
+    number: "02",
+    title: "Simpler maintenance",
+    description: "Fewer mechanical components to maintain.",
+    icon: Wrench,
   },
-};
-
-const floating: Variants = {
-  animate: {
-    y: [0, -10, 0],
-    transition: {
-      duration: 5,
-      repeat: Infinity,
-      ease: [0.4, 0, 0.2, 1], // ✅ TS-safe easeInOut
-    },
+  {
+    number: "03",
+    title: "Cleaner movement",
+    description: "Quiet driving with zero tailpipe emissions.",
+    icon: Leaf,
   },
-};
+  {
+    number: "04",
+    title: "Made for daily life",
+    description: "Practical mobility for everyday India.",
+    icon: Zap,
+  },
+];
 
-/* ===================== METRIC BAR ===================== */
-const MetricBar = ({ label, ev, petrol, evLabel, petrolLabel, delay = 0 }) => {
+const comparisons = [
+  {
+    label: "Running cost",
+    description: "Everyday cost of mobility",
+    ev: "Lower",
+    petrol: "Higher",
+    advantage: "78%",
+  },
+  {
+    label: "Maintenance",
+    description: "Mechanical complexity",
+    ev: "Lower",
+    petrol: "Higher",
+    advantage: "68%",
+  },
+  {
+    label: "Tailpipe emissions",
+    description: "While driving",
+    ev: "Zero",
+    petrol: "Higher",
+    advantage: "95%",
+  },
+  {
+    label: "Energy efficiency",
+    description: "Energy used to move",
+    ev: "Higher",
+    petrol: "Lower",
+    advantage: "84%",
+  },
+];
+
+const WhyChooseUsWithChart = () => {
   return (
-    <motion.div variants={fadeUp} className="space-y-3">
-      {/* Header */}
-      <div className="flex justify-between items-center">
-        <p className="text-sm font-semibold text-white">{label}</p>
-        <span className="text-xs font-bold text-emerald-400 tracking-wide">
-          EV ADVANTAGE
-        </span>
-      </div>
+    <section className="relative overflow-hidden bg-[#F2EEE6] py-9 sm:py-10 lg:py-12">
+      {/* Background shapes */}
+      <div className="pointer-events-none absolute -right-32 -top-32 h-[360px] w-[360px] rounded-full border border-[#B5945A]/20" />
 
-      {/* Bar Track */}
-      <div className="relative h-6 rounded-full bg-white/15 backdrop-blur overflow-hidden">
-        {/* Petrol */}
-        <motion.div
-          initial={{ width: 0, opacity: 0.35 }}
-          whileInView={{ width: `${petrol}%` }}
-          transition={{ duration: 1.2, delay, ease: "easeOut" }}
-          className="absolute inset-y-0 left-0
-          bg-gradient-to-r from-red-500 to-orange-400"
-        />
+      <div className="pointer-events-none absolute -right-16 -top-16 h-[230px] w-[230px] rounded-full bg-[#D9C8A8]/15" />
 
-        {/* EV */}
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: `${ev}%` }}
-          transition={{ duration: 1.5, delay: delay + 0.2, ease: "easeOut" }}
-          animate={{
-            boxShadow: [
-              "0 0 18px rgba(16,185,129,0.4)",
-              "0 0 42px rgba(16,185,129,0.8)",
-              "0 0 18px rgba(16,185,129,0.4)",
-            ],
-          }}
-          className="absolute inset-y-0 left-0
-          bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400"
-        />
-      </div>
+      <div className="relative mx-auto max-w-[1380px] px-5 sm:px-8 lg:px-12">
+        {/* HEADER */}
+        <div className="grid gap-5 lg:grid-cols-[1fr_340px] lg:items-end">
+          <div>
+            <div className="mb-3 flex items-center gap-3">
+              <span className="h-px w-8 bg-[#B18C51]" />
 
-      {/* Labels */}
-      <div className="flex justify-between text-xs">
-        <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300">
-          EV: {evLabel}
-        </span>
-        <span className="px-3 py-1 rounded-full bg-red-500/20 text-red-300">
-          Petrol: {petrolLabel}
-        </span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#A37D42]">
+                The RIJI advantage
+              </span>
+            </div>
+
+            <h2 className="text-[40px] font-medium leading-[0.92] tracking-[-0.055em] text-[#171717] sm:text-[50px] lg:text-[64px]">
+              A smarter way
+              <br />
+              <span className="text-[#A98246]">to move.</span>
+            </h2>
+          </div>
+
+          <p className="max-w-md text-sm leading-5 text-[#777168]">
+            Lower running costs, simpler maintenance and efficient electric
+            technology for everyday Indian mobility.
+          </p>
+        </div>
+
+        {/* BENEFITS */}
+        <div className="mt-7 grid overflow-hidden rounded-[18px] border border-[#D7D0C3] bg-[#F8F5EF] sm:grid-cols-2 lg:grid-cols-4">
+          {benefits.map((benefit, index) => {
+            const Icon = benefit.icon;
+
+            return (
+              <div
+                key={benefit.number}
+                className={`
+                  group
+                  p-4
+                  transition-colors
+                  duration-300
+                  hover:bg-[#171717]
+                  ${
+                    index < 3
+                      ? "border-b border-[#D7D0C3] lg:border-b-0 lg:border-r"
+                      : ""
+                  }
+                `}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-[9px] font-bold tracking-[0.2em] text-[#B18C51]">
+                    {benefit.number}
+                  </span>
+
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-[#ECE5D8] text-[#8D6D3D] transition-colors group-hover:bg-[#B18C51] group-hover:text-white">
+                    <Icon size={13} strokeWidth={1.7} />
+                  </div>
+                </div>
+
+                <h3 className="mt-5 text-sm font-semibold text-[#171717] transition-colors group-hover:text-white">
+                  {benefit.title}
+                </h3>
+
+                <p className="mt-1 text-[11px] leading-4 text-[#827A70] transition-colors group-hover:text-white/45">
+                  {benefit.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* MAIN COMPARISON */}
+        <div className="relative mt-7 overflow-hidden rounded-[24px] bg-[#171717]">
+          {/* Decorative shapes */}
+          <div className="pointer-events-none absolute -right-28 -top-28 h-[330px] w-[330px] rounded-full border border-[#C5A56C]/20" />
+
+          <div className="pointer-events-none absolute -right-10 -top-10 h-[210px] w-[210px] rounded-full bg-[#C5A56C]/10" />
+
+          <div className="relative grid lg:grid-cols-[0.78fr_1.22fr]">
+            {/* LEFT */}
+            <div className="flex flex-col justify-between border-b border-white/10 p-6 sm:p-7 lg:border-b-0 lg:border-r lg:p-8">
+              <div>
+                <div className="flex items-center gap-2">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-full border border-[#C5A56C]/40">
+                    <Gauge size={12} className="text-[#C5A56C]" />
+                  </div>
+
+                  <span className="text-[9px] font-semibold uppercase tracking-[0.25em] text-[#C5A56C]">
+                    Ownership intelligence
+                  </span>
+                </div>
+
+                <h3 className="mt-6 text-[32px] font-medium leading-[0.96] tracking-[-0.045em] text-white sm:text-[38px]">
+                  What changes
+                  <br />
+                  when you
+                  <br />
+                  <span className="text-[#C5A56C]">go electric?</span>
+                </h3>
+
+                <p className="mt-4 max-w-sm text-xs leading-5 text-white/45">
+                  Change the economics and experience of everyday travel.
+                </p>
+              </div>
+
+              <Link
+                to="/products"
+                className="group mt-7 inline-flex w-fit items-center gap-2 text-xs font-semibold text-white"
+              >
+                Discover RIJI EV
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#C5A56C] text-[#171717] transition-transform group-hover:translate-x-1">
+                  <ArrowUpRight size={13} />
+                </span>
+              </Link>
+            </div>
+
+            {/* RIGHT */}
+            <div className="p-6 sm:p-7 lg:p-8">
+              <div className="flex items-end justify-between border-b border-white/10 pb-4">
+                <div>
+                  <p className="text-[9px] font-bold uppercase tracking-[0.25em] text-[#C5A56C]">
+                    Live comparison
+                  </p>
+
+                  <h3 className="mt-1 text-xl font-semibold tracking-[-0.03em] text-white sm:text-2xl">
+                    EV vs Petrol
+                  </h3>
+                </div>
+
+                <div className="hidden items-center gap-2 sm:flex">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#C5A56C]" />
+
+                  <span className="text-[9px] uppercase tracking-[0.18em] text-white/30">
+                    RIJI EV
+                  </span>
+                </div>
+              </div>
+
+              <div>
+                {comparisons.map((item) => (
+                  <ComparisonRow
+                    key={item.label}
+                    label={item.label}
+                    description={item.description}
+                    ev={item.ev}
+                    petrol={item.petrol}
+                    advantage={item.advantage}
+                  />
+                ))}
+              </div>
+
+              <div className="mt-3 flex items-center gap-2 border-t border-white/10 pt-4">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#C5A56C]/10">
+                  <Check size={11} className="text-[#C5A56C]" />
+                </span>
+
+                <span className="text-[10px] text-white/35">
+                  Built for everyday ownership.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* SMALL STATS */}
+        <div className="mt-5 grid grid-cols-2 overflow-hidden rounded-[18px] border border-[#D7D0C3] bg-[#F8F5EF] sm:grid-cols-4">
+          <Stat value="01" label="Electric" text="Powertrain" />
+          <Stat value="02" label="Lower" text="Ownership complexity" />
+          <Stat value="03" label="Cleaner" text="Everyday movement" />
+          <Stat value="04" label="Ready" text="For daily India" />
+        </div>
       </div>
-    </motion.div>
+    </section>
   );
 };
 
-/* ===================== MAIN SECTION ===================== */
-const WhyChooseUsWithChart = () => {
-  return (
-    <section className="relative py-28 overflow-hidden">
-      {/* Dark overlay */}
-      <div className="absolute inset-0 -z-10 bg-black/75" />
+/* =========================================================
+   COMPARISON ROW
+========================================================= */
 
-      {/* AI Glow */}
-      <div className="absolute inset-0 -z-10">
-        <div
-          className="absolute top-24 left-24 w-[420px] h-[420px]
-          bg-emerald-400/30 blur-[160px] rounded-full"
-        />
-        <div
-          className="absolute bottom-24 right-24 w-[520px] h-[520px]
-          bg-cyan-400/30 blur-[180px] rounded-full"
-        />
+type ComparisonRowProps = {
+  label: string;
+  description: string;
+  ev: string;
+  petrol: string;
+  advantage: string;
+};
+
+const ComparisonRow = ({
+  label,
+  description,
+  ev,
+  petrol,
+  advantage,
+}: ComparisonRowProps) => {
+  return (
+    <div className="group border-b border-white/10 py-3.5 last:border-b-0">
+      <div className="flex items-center justify-between gap-4">
+        <div>
+          <h4 className="text-xs font-semibold text-white">{label}</h4>
+
+          <p className="mt-0.5 text-[10px] text-white/25">{description}</p>
+        </div>
+
+        <span className="rounded-full border border-[#C5A56C]/25 px-2 py-0.5 text-[8px] font-semibold uppercase tracking-[0.15em] text-[#C5A56C]">
+          EV
+        </span>
       </div>
 
-      <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-        className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center"
-      >
-        {/* ================= LEFT ================= */}
-        <motion.div className="text-white space-y-8">
-          <motion.span
-            variants={fadeUp}
-            className="inline-block px-5 py-2 rounded-full
-            bg-white/10 backdrop-blur
-            border border-white/20
-            text-xs tracking-widest uppercase text-emerald-400"
-          >
-            Why Choose Us
-          </motion.span>
+      <div className="mt-2.5">
+        <div className="h-[4px] overflow-hidden rounded-full bg-white/10">
+          <div
+            className="h-full rounded-full bg-gradient-to-r from-[#92703D] to-[#D5B878] transition-all duration-700 group-hover:brightness-110"
+            style={{ width: advantage }}
+          />
+        </div>
 
-          <motion.h2
-            variants={fadeUp}
-            className="text-4xl lg:text-5xl font-extrabold leading-tight"
-          >
-            Built for India.
-            <br />
-            <span
-              className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400
-              bg-clip-text text-transparent"
-            >
-              Engineered for the Future.
-            </span>
-          </motion.h2>
+        <div className="mt-1.5 flex justify-between">
+          <span className="text-[9px] font-medium text-[#C5A56C]">
+            RIJI EV · {ev}
+          </span>
 
-          <motion.p
-            variants={fadeUp}
-            className="text-lg text-gray-200 leading-relaxed max-w-xl"
-          >
-            RIJI EV vehicles are designed for real Indian roads, real daily
-            usage, and real savings. Modern EV technology meets durable
-            engineering.
-          </motion.p>
+          <span className="text-[9px] text-white/20">Petrol · {petrol}</span>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-          {/* Feature Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-xl">
-            {[
-              [
-                "⚡",
-                "Ultra-Low Running Cost",
-                "Save up to 80% on fuel expenses.",
-              ],
-              ["🛠", "Minimal Maintenance", "Fewer parts, longer lifespan."],
-              ["🌱", "Zero Emissions", "Cleaner, quieter rides."],
-              ["💰", "Higher ROI", "Perfect for personal & commercial use."],
-            ].map(([icon, title, desc], i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                whileHover={{ scale: 1.05 }}
-                {...floating}
-                className="rounded-2xl p-5
-                bg-white/10 backdrop-blur-xl
-                border border-white/20
-                shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
-              >
-                <div className="text-2xl mb-2">{icon}</div>
-                <h4 className="font-semibold text-white mb-1">{title}</h4>
-                <p className="text-sm text-gray-300">{desc}</p>
-              </motion.div>
-            ))}
-          </div>
+/* =========================================================
+   STAT
+========================================================= */
 
-          <motion.p
-            variants={fadeUp}
-            className="text-lg font-semibold text-emerald-400"
-          >
-            Switch once. Save every day.
-          </motion.p>
-        </motion.div>
+type StatProps = {
+  value: string;
+  label: string;
+  text: string;
+};
 
-        {/* ================= RIGHT ================= */}
-        <motion.div
-          variants={fadeUp}
-          className="rounded-3xl p-10
-          bg-white/10 backdrop-blur-2xl
-          border border-white/20
-          shadow-[0_40px_120px_rgba(0,0,0,0.5)]"
-        >
-          <h3 className="text-2xl font-extrabold text-white mb-8 text-center">
-            EV vs Petrol — Live Comparison
-          </h3>
+const Stat = ({ value, label, text }: StatProps) => {
+  return (
+    <div className="group p-4 transition-colors duration-300 hover:bg-[#171717] sm:border-r sm:border-[#D7D0C3] sm:last:border-r-0">
+      <span className="text-[9px] font-bold tracking-[0.2em] text-[#B18C51]">
+        {value}
+      </span>
 
-          <div className="space-y-10">
-            <MetricBar
-              label="Running Cost (per km)"
-              ev={20}
-              petrol={85}
-              evLabel="₹1 / km"
-              petrolLabel="₹6–8 / km"
-              delay={0}
-            />
-            <MetricBar
-              label="Maintenance Cost"
-              ev={25}
-              petrol={75}
-              evLabel="Very Low"
-              petrolLabel="High"
-              delay={0.2}
-            />
-            <MetricBar
-              label="Environmental Impact"
-              ev={15}
-              petrol={90}
-              evLabel="Zero Emission"
-              petrolLabel="High Pollution"
-              delay={0.4}
-            />
-            <MetricBar
-              label="Energy Efficiency"
-              ev={85}
-              petrol={40}
-              evLabel="High Efficiency"
-              petrolLabel="Low Efficiency"
-              delay={0.6}
-            />
-          </div>
-        </motion.div>
-      </motion.div>
-    </section>
+      <h4 className="mt-2 text-xs font-semibold text-[#171717] transition-colors group-hover:text-white">
+        {label}
+      </h4>
+
+      <p className="mt-0.5 text-[10px] text-[#81796E] transition-colors group-hover:text-white/35">
+        {text}
+      </p>
+    </div>
   );
 };
 
