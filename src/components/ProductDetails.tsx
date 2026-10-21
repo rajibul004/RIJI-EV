@@ -101,6 +101,20 @@ export default function ProductDetails() {
    * Selected colour
    */
   const selectedColorData = product.colors?.[selectedColor];
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  const galleryImages =
+    product?.images?.length > 0
+      ? product.images
+      : [
+          {
+            src: product?.image ?? "",
+            alt: product?.name ?? "RIJI EV electric vehicle",
+            color: "",
+          },
+        ];
+
+  const activeImage = galleryImages[activeImageIndex] ?? galleryImages[0];
 
   /*
    * Go to next feature
@@ -1447,38 +1461,43 @@ export default function ProductDetails() {
                 </div>
 
                 {/* RIGHT VISUAL */}
-                <div className="relative flex min-h-[330px] items-center justify-center overflow-hidden border-t border-white/10 bg-[#0F141B] lg:min-h-[470px] lg:border-l lg:border-t-0">
-                  {/* Large product name */}
-                  <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none whitespace-nowrap text-[18vw] font-bold leading-none tracking-[-0.1em] text-white/[0.025] lg:text-[9vw]">
-                    {product.name}
-                  </div>
 
-                  {/* Ring */}
-                  <div className="absolute h-[230px] w-[230px] rounded-full border border-white/[0.06] sm:h-[280px] sm:w-[280px]" />
-
-                  <div className="absolute h-[170px] w-[170px] rounded-full border border-[#2563EB]/20 sm:h-[210px] sm:w-[210px]" />
-
-                  {/* Vehicle */}
+                {/* Product image gallery */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center pb-24 pt-20">
                   <img
-                    src={product.image}
-                    alt={product.name}
-                    className="relative z-10 w-[82%] max-w-[470px] object-contain drop-shadow-[0_25px_30px_rgba(0,0,0,0.4)]"
-                    loading="lazy"
+                    src={activeImage.src}
+                    alt={activeImage.alt}
+                    fetchPriority="high"
+                    decoding="async"
+                    className="h-[42vh] w-[94vw] object-contain sm:h-[50vh] lg:h-[60vh] xl:h-[64vh] transition-opacity duration-300"
                   />
 
-                  {/* Small label */}
-                  <div className="absolute bottom-6 left-6 z-20">
-                    <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-white/30">
-                      RIJI EV
-                    </p>
-
-                    <p className="mt-1 text-xs font-medium text-white/60">
-                      {product.name}
-                    </p>
-                  </div>
-
-                  {/* Blue accent */}
-                  <div className="absolute right-7 top-7 h-2 w-2 rounded-full bg-[#3B82F6] shadow-[0_0_20px_rgba(59,130,246,0.8)]" />
+                  {/* Clickable angle thumbnails */}
+                  {galleryImages.length > 1 && (
+                    <div className="absolute bottom-[22%] left-1/2 z-20 flex -translate-x-1/2 items-center gap-3">
+                      {galleryImages.map((image, index) => (
+                        <button
+                          key={image.src}
+                          type="button"
+                          onClick={() => setActiveImageIndex(index)}
+                          aria-label={`View ${image.color || product.name} image ${index + 1}`}
+                          aria-pressed={activeImageIndex === index}
+                          className={`h-14 w-16 overflow-hidden rounded-xl border bg-white/90 p-1 transition-all sm:h-16 sm:w-20 ${
+                            activeImageIndex === index
+                              ? "border-blue-600 ring-2 ring-blue-600/20"
+                              : "border-gray-200 opacity-75 hover:opacity-100"
+                          }`}
+                        >
+                          <img
+                            src={image.src}
+                            alt={image.alt}
+                            loading="lazy"
+                            className="h-full w-full object-contain"
+                          />
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

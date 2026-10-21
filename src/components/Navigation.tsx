@@ -198,7 +198,7 @@ const Navigation = () => {
           </div>
 
           {/* ===================================================
-              DESKTOP CTA
+              DESKTOP CTArijiev.com
           =================================================== */}
 
           <div className="hidden lg:flex items-center">
@@ -334,31 +334,31 @@ const Navigation = () => {
 
           {/* MOBILE CTA */}
 
+          {/* MOBILE DEALERSHIP CTA */}
           <Link
-            to="/contact"
+            to="/dealership"
+            onClick={() => setIsMenuOpen(false)}
             className="
-              group
-              mt-4
-              flex items-center justify-between
-              rounded-xl
-              bg-[#181818]
-              px-5 py-3.5
-              text-[13px]
-              font-semibold
-              text-white
-              transition-all duration-300
-              hover:bg-[#B08A4A]
-            "
+    group mt-4
+    flex items-center justify-between
+    rounded-xl
+    bg-[#181818]
+    px-5 py-3.5
+    text-[13px] font-semibold
+    text-white
+    transition-all duration-300
+    hover:bg-[#B08A4A]
+  "
           >
-            <span>Book a Ride</span>
+            <span>Join Our Dealership</span>
 
             <ArrowUpRight
               size={17}
               className="
-                transition-transform duration-300
-                group-hover:translate-x-0.5
-                group-hover:-translate-y-0.5
-              "
+      transition-transform duration-300
+      group-hover:translate-x-0.5
+      group-hover:-translate-y-0.5
+    "
             />
           </Link>
         </div>

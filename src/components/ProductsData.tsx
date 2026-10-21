@@ -8,21 +8,40 @@ import {
   Monitor,
   Package,
   Lightbulb,
-  CircleDot,
+  Circle,
   Weight,
   Ruler,
 } from "lucide-react";
 
 import RijiVoltImg from "@/assets/products/e-rickshaw.png";
-import RijiMaxImg from "@/assets/Glossy Yellow Electric Scooter.png";
 import RijiTotoImg from "@/assets/products/toto2.png";
+import rijiOlaProBlueFront from "../assets/products/riji-ola-pro-electric-scooter-blue-front-view.jpeg";
+import rijiOlaProBlueSide from "../assets/products/riji-ola-pro-electric-scooter-blue-side-angle.jpeg";
+import rijiOlaProYellowFront from "../assets/products/riji-ola-pro-electric-scooter-yellow-front-view.jpeg";
+import rijiOlaProBlueThreeQuarter from "../assets/products/riji-ola-pro-electric-scooter-blue-three-quarter-view.jpeg";
 
-// Optional feature images
-// Add these files when you have the actual images.
-// import RijiVoltStorage from "@/assets/products/volt-storage.png";
-// import RijiVoltComfort from "@/assets/products/volt-comfort.png";
-// import RijiVoltTechnology from "@/assets/products/volt-display.png";
-// import RijiVoltPerformance from "@/assets/products/volt-performance.png";
+const rijiOlaProImages = [
+  {
+    src: rijiOlaProBlueFront,
+    alt: "RIJI OLA PRO electric scooter in blue, front view",
+    color: "Blue",
+  },
+  {
+    src: rijiOlaProBlueSide,
+    alt: "RIJI OLA PRO blue electric scooter, side angle",
+    color: "Blue",
+  },
+  {
+    src: rijiOlaProYellowFront,
+    alt: "RIJI OLA PRO electric scooter in yellow, front view",
+    color: "Yellow",
+  },
+  {
+    src: rijiOlaProBlueThreeQuarter,
+    alt: "RIJI OLA PRO blue electric scooter, three-quarter view",
+    color: "Blue",
+  },
+];
 
 export const products = [
   {
@@ -270,23 +289,23 @@ export const products = [
   {
     id: 2,
 
-    name: "RijiMax",
-    slug: "rijimax",
+    name: "Riji Ola Pro",
+    slug: "riji-ola-pro",
 
     category: "scooty",
     categoryLabel: "Electric Scooty",
 
-    price: 109999,
-
-    image: RijiMaxImg,
+    price: 78999, // Update with actual selling price
+    image: rijiOlaProImages[0].src,
+    images: rijiOlaProImages,
 
     description:
-      "A premium electric scooty focused on longer everyday journeys, comfortable riding and useful technology.",
+      "A practical electric scooty featuring a 1200W motor, alloy wheels, LED lighting, passenger footrests and spacious under-seat storage.",
 
     shortDescription:
-      "Long-range electric mobility with a premium everyday experience.",
+      "Everyday electric mobility with practical features and comfortable utility.",
 
-    tagline: "Go further. Ride smarter.",
+    tagline: "Ride smart. Move forward.",
 
     // =====================================================
     // KEY SPECIFICATIONS
@@ -294,24 +313,24 @@ export const products = [
 
     specs: [
       {
-        label: "Battery",
-        value: "3.5 kWh",
-        Icon: Battery,
-      },
-      {
-        label: "Range",
-        value: "170 km",
+        label: "Motor Power",
+        value: "1200 W",
         Icon: Zap,
       },
       {
-        label: "Top Speed",
-        value: "80 km/h",
+        label: "Controller",
+        value: "48V / 60V / 72V",
+        Icon: Battery,
+      },
+      {
+        label: "Tyres",
+        value: "90/90-12",
         Icon: Gauge,
       },
       {
-        label: "Charging",
-        value: "3.5 hrs",
-        Icon: Clock,
+        label: "Lighting",
+        value: "LED",
+        Icon: Lightbulb,
       },
     ],
 
@@ -320,10 +339,10 @@ export const products = [
     // =====================================================
 
     performance: {
-      topSpeed: "80 km/h",
-      range: "170 km",
-      motor: "—",
-      motorPower: "—",
+      topSpeed: "—",
+      range: "—",
+      motor: "Electric Motor",
+      motorPower: "1200 W",
       ridingModes: ["—"],
     },
 
@@ -332,10 +351,10 @@ export const products = [
     // =====================================================
 
     battery: {
-      capacity: "3.5 kWh",
+      capacity: "—",
       type: "—",
-      voltage: "—",
-      chargingTime: "3.5 hrs",
+      voltage: "48V / 60V / 72V controller support",
+      chargingTime: "—",
       chargingType: "—",
       removable: "—",
     },
@@ -361,7 +380,7 @@ export const products = [
       seatingCapacity: "—",
       passengerCapacity: "—",
       loadCapacity: "—",
-      storageCapacity: "—",
+      storageCapacity: "Large boot space",
     },
 
     // =====================================================
@@ -369,10 +388,12 @@ export const products = [
     // =====================================================
 
     comfort: {
-      seating: "Ergonomic seating",
-      suspension: "Smooth suspension setup",
+      seating: "—",
+      suspension: "—",
       ridingPosition: "—",
       footboard: "—",
+      passengerFootrest: "Yes",
+      bootSpace: "Large boot space",
     },
 
     // =====================================================
@@ -380,8 +401,8 @@ export const products = [
     // =====================================================
 
     technology: {
-      display: "Large 7-inch digital display",
-      musicSystem: "Premium sound system",
+      display: "—",
+      musicSystem: "—",
       usbCharging: "—",
       connectivity: "—",
       smartFeatures: "—",
@@ -394,8 +415,8 @@ export const products = [
     safety: {
       sensorLock: "—",
       handleLock: "—",
-      lighting: "—",
-      brakes: "—",
+      lighting: "LED headlight",
+      brakes: "Front and rear disc brakes",
       reverseMode: "—",
       parkingSystem: "—",
     },
@@ -405,10 +426,11 @@ export const products = [
     // =====================================================
 
     wheels: {
-      frontTyre: "—",
-      rearTyre: "—",
+      frontTyre: "90/90-12",
+      rearTyre: "90/90-12",
       tyreType: "—",
-      wheelSize: "—",
+      wheelSize: "12-inch",
+      wheelType: "Alloy wheels",
     },
 
     // =====================================================
@@ -419,25 +441,25 @@ export const products = [
       {
         title: "Performance",
         icon: Zap,
-        items: ["170 km long range", "High-speed motor (80 km/h)"],
+        items: ["1200W electric motor", "48V / 60V / 72V controller options"],
       },
 
       {
         title: "Comfort",
         icon: Armchair,
-        items: ["Ergonomic seating", "Smooth suspension setup"],
+        items: ["Passenger footrests", "Large boot space"],
       },
 
       {
-        title: "Technology",
-        icon: Monitor,
-        items: ["Large 7-inch digital display", "Premium sound system"],
+        title: "Lighting",
+        icon: Lightbulb,
+        items: ["LED headlight"],
       },
 
       {
-        title: "Premium Features",
-        icon: ShieldCheck,
-        items: ["Heated grips", "Enhanced riding experience"],
+        title: "Wheels & Tyres",
+        icon: Circle,
+        items: ["Alloy wheels", "90/90-12 front tyre", "90/90-12 rear tyre"],
       },
     ],
 
@@ -447,30 +469,30 @@ export const products = [
 
     coreFeatures: [
       {
-        title: "Long Range",
+        title: "1200W Electric Motor",
         description:
-          "Designed for longer everyday journeys with a 170 km claimed range.",
+          "Electric power designed for everyday commuting and practical urban mobility.",
         image: null,
       },
 
       {
-        title: "Comfortable Seating",
+        title: "Passenger Comfort",
         description:
-          "Ergonomic seating designed for a comfortable riding position.",
+          "Passenger footrests provide additional practicality for two-person riding.",
         image: null,
       },
 
       {
-        title: "Digital Technology",
+        title: "LED Lighting",
         description:
-          "A large digital display puts useful riding information within view.",
+          "An LED headlight provides modern styling and front illumination.",
         image: null,
       },
 
       {
-        title: "Electric Performance",
+        title: "Spacious Boot",
         description:
-          "High-speed electric mobility with a claimed top speed of 80 km/h.",
+          "Large boot space provides convenient storage for everyday essentials.",
         image: null,
       },
     ],
