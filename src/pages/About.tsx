@@ -1,548 +1,482 @@
-import React from "react";
 import {
+  ArrowDownRight,
   ArrowRight,
   ArrowUpRight,
-  Building2,
-  Handshake,
+  Compass,
   Lightbulb,
   ShieldCheck,
-  Target,
   Users,
-  Compass,
-  Sparkles,
+  Zap,
 } from "lucide-react";
 
 import Navigation from "../components/Navigation";
-
-// Use your own company/team/workspace image here.
-// Replace these paths with your actual assets.
 import companyImage from "../assets/company.jpg";
-import teamImage from "../assets/company.jpg";
+import Footer from "../components/Footer";
+
+const directors = [
+  { name: "RIJAUL HAQUE MONDAL", initials: "RM", number: "01" },
+  { name: "SAFINA BEGAM MONDAL", initials: "SM", number: "02" },
+];
 
 const values = [
   {
-    icon: Target,
+    number: "01",
+    icon: Compass,
     title: "Purpose",
-    text: "We build with a clear understanding of the problem we want to solve and the people we want to serve.",
+    text: "We build with a clear understanding of the problems we want to solve and the people we want to serve.",
   },
   {
+    number: "02",
     icon: Lightbulb,
     title: "Innovation",
-    text: "We stay curious, experiment with new ideas and continuously look for better ways to create value.",
+    text: "We stay curious, experiment with new ideas and look for better ways to create value.",
   },
   {
+    number: "03",
     icon: ShieldCheck,
     title: "Integrity",
-    text: "We believe long-term businesses are built through honesty, accountability and trust.",
+    text: "We believe lasting businesses are built through honesty, accountability and trust.",
   },
   {
+    number: "04",
     icon: Users,
     title: "People",
     text: "Our people are at the heart of the company. We value ownership, collaboration and continuous learning.",
   },
   {
-    icon: Handshake,
+    number: "05",
+    icon: ArrowRight,
     title: "Partnership",
-    text: "We believe meaningful growth comes from building strong relationships with customers, partners and communities.",
+    text: "Meaningful growth comes from strong relationships with customers, partners and communities.",
   },
   {
+    number: "06",
     icon: Compass,
     title: "Long-term thinking",
-    text: "We focus beyond short-term opportunities and work toward building businesses that can grow sustainably.",
+    text: "We look beyond short-term opportunities and work toward building businesses that can grow sustainably.",
   },
 ];
 
-const principles = [
-  "Start with the real problem",
-  "Build with purpose",
-  "Learn continuously",
-  "Take ownership",
-  "Create long-term value",
-];
-
+// Typography system: font-serif italic display headings, font-mono eyebrow labels,
+// and clean sans-serif body copy for an editorial, premium brand-promotion feel.
 export default function About() {
   return (
-    <div className="min-h-screen bg-white text-slate-950">
+    <main className="bg-white text-[#101827]">
       <Navigation />
 
-      {/* =========================================================
-          HERO
-      ========================================================= */}
-      <section className="relative overflow-hidden bg-[#f5f7fa]">
-        <div className="mx-auto grid min-h-[650px] max-w-[1450px] items-center gap-12 px-6 py-20 sm:px-10 lg:grid-cols-[0.9fr_1.1fr] lg:px-16 lg:py-24">
-          {/* LEFT */}
-          <div className="relative z-10">
-            <div className="mb-7 flex items-center gap-3">
-              <span className="h-px w-10 bg-[#0165F6]" />
+      {/* HERO */}
+      <section className="relative isolate min-h-[560px] overflow-hidden bg-[#071326] text-white sm:min-h-[620px]">
+        <img
+          src={companyImage}
+          alt="RIJI EV electric mobility"
+          className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+        />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-[#071326]/95 via-[#071326]/70 to-[#071326]/20" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#071326]/70 via-transparent to-transparent" />
 
-              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
-                About the company
-              </span>
-            </div>
-
-            <h1 className="max-w-3xl text-5xl font-semibold leading-[0.94] tracking-[-0.06em] sm:text-6xl lg:text-7xl xl:text-[82px]">
-              Building businesses
-              <span className="block text-[#0165F6]">for what comes next.</span>
+        <div className="mx-auto flex min-h-[560px] max-w-[1320px] flex-col justify-end px-5 pb-10 pt-24 sm:min-h-[620px] sm:px-8 sm:pb-14 lg:px-12">
+          <div className="mb-5 flex items-center gap-3">
+            <span className="h-px w-9 bg-blue-400" />
+            <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-blue-200 sm:text-xs">
+              THE WORLD OF RIJI EV
+            </span>
+          </div>
+          <div className="grid gap-7 lg:grid-cols-[1fr_340px] lg:items-end">
+            <h1 className="max-w-4xl font-serif text-5xl font-medium italic leading-[0.94] tracking-[-0.055em] sm:text-7xl lg:text-[96px]">
+              A new way
+              <span className="block text-[#78adff]">to move.</span>
             </h1>
-
-            <p className="mt-8 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">
-              RIJIYA PVT. LTD. is focused on building businesses and solutions
-              around emerging opportunities, changing customer needs and the
-              future of everyday life.
-            </p>
-
-            <div className="mt-9 flex flex-wrap gap-4">
+            <div className="max-w-sm lg:pb-2">
+              <p className="text-sm leading-7 text-white/75 sm:text-base">
+                We are a growing Indian company exploring opportunities,
+                building relationships and looking towards what comes next.
+              </p>
               <a
-                href="#company"
-                className="group inline-flex items-center gap-3 rounded-full bg-slate-950 px-6 py-3.5 text-sm font-medium text-white transition hover:bg-[#0165F6]"
+                href="#overview"
+                className="mt-5 inline-flex items-center gap-2 rounded-full bg-[#0165F6] px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-500"
               >
-                Discover RIJIYA
-                <ArrowRight
-                  size={17}
-                  className="transition-transform duration-200 group-hover:translate-x-1"
-                />
-              </a>
-
-              <a
-                href="#culture"
-                className="inline-flex items-center gap-2 rounded-full px-5 py-3.5 text-sm font-medium text-slate-600 transition hover:text-slate-950"
-              >
-                Our culture
-                <ArrowRight size={16} />
+                Discover the RIJI story <ArrowDownRight size={17} />
               </a>
             </div>
           </div>
 
-          {/* RIGHT IMAGE */}
-          <div className="relative">
-            <div className="absolute -right-10 top-10 h-72 w-72 rounded-full bg-[#0165F6]/10 blur-3xl" />
-
-            <div className="relative overflow-hidden rounded-[2rem] bg-white">
-              <img
-                src={companyImage}
-                alt="RIJIYA PVT. LTD."
-                className="h-[500px] w-full object-cover"
-              />
-            </div>
-
-            {/* Small company label */}
-            <div className="absolute bottom-6 left-6 rounded-2xl bg-white px-5 py-4 shadow-lg">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
-                Company
-              </p>
-
-              <p className="mt-1 text-sm font-semibold">RIJIYA PVT. LTD.</p>
-            </div>
+          <div className="mt-8 flex flex-wrap gap-2">
+            <span className="rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs text-white/85 backdrop-blur">
+              Made for movement
+            </span>
+            <span className="rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs text-white/85 backdrop-blur">
+              Ready for tomorrow
+            </span>
+            <span className="rounded-full border border-white/25 bg-white/10 px-4 py-2 text-xs text-white/85 backdrop-blur">
+              Electric by vision
+            </span>
           </div>
         </div>
+        <div className="pointer-events-none absolute -right-20 top-20 hidden h-64 w-64 rounded-full border border-white/15 lg:block" />
+        <div className="pointer-events-none absolute -right-8 top-32 hidden h-40 w-40 rounded-full border border-blue-300/30 lg:block" />
       </section>
 
-      {/* =========================================================
-          COMPANY INTRODUCTION
-      ========================================================= */}
-      <section id="company" className="px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
-        <div className="mx-auto max-w-[1250px]">
-          <div className="grid gap-14 lg:grid-cols-[0.45fr_1.55fr] lg:gap-24">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#0165F6]">
-                Who we are
-              </p>
-            </div>
-
-            <div>
-              <h2 className="max-w-5xl text-4xl font-semibold leading-[1.08] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
-                RIJIYA is a company built around ideas, people and
-                opportunities.
-              </h2>
-
-              <div className="mt-9 max-w-4xl space-y-6 text-base leading-8 text-slate-600 sm:text-lg">
-                <p>
-                  RIJIYA PVT. LTD. is focused on identifying meaningful
-                  opportunities and turning them into businesses that can create
-                  lasting value.
-                </p>
-
-                <p>
-                  We believe companies should evolve with the world around them.
-                  Customer expectations change, technology changes and
-                  industries change. Our role is to understand those changes and
-                  build with them.
-                </p>
-
-                <p>
-                  Rather than limiting ourselves to one category, we aim to
-                  develop businesses with a clear purpose, strong foundations
-                  and the ability to grow over time.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================
-          MISSION
-      ========================================================= */}
-      <section className="bg-slate-950 px-6 py-24 text-white sm:px-10 lg:px-16 lg:py-32">
-        <div className="mx-auto max-w-[1300px]">
-          <div className="grid gap-14 lg:grid-cols-[0.7fr_1.3fr] lg:gap-24">
-            <div>
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#0165F6]">
-                <Target size={25} />
-              </div>
-
-              <p className="mt-8 text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
-                Our Mission
-              </p>
-            </div>
-
-            <div>
-              <h2 className="text-4xl font-semibold leading-[1.05] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
-                Create businesses that solve real problems and create meaningful
-                value.
-              </h2>
-
-              <p className="mt-8 max-w-3xl text-base leading-8 text-slate-400 sm:text-lg">
-                Our mission is to build purposeful businesses by combining
-                entrepreneurial thinking, technology, strong execution and a
-                deep understanding of the people we serve.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================
-          VISION
-      ========================================================= */}
-      <section className="px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
-        <div className="mx-auto max-w-[1250px]">
-          <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-24">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#0165F6]">
-                Our Vision
-              </p>
-
-              <h2 className="mt-5 text-4xl font-semibold leading-[1.05] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
-                Build a company prepared for the opportunities of tomorrow.
-              </h2>
-
-              <p className="mt-8 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">
-                We want RIJIYA to grow into an organisation capable of creating
-                businesses across meaningful and evolving sectors — while
-                remaining grounded in people, responsibility and long-term
-                thinking.
-              </p>
-            </div>
-
-            <div className="rounded-[2rem] bg-[#f5f7fa] p-8 sm:p-12">
-              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-[#0165F6] shadow-sm">
-                <Compass size={25} />
-              </div>
-
-              <p className="mt-10 text-2xl font-semibold tracking-[-0.025em]">
-                Think beyond today.
-              </p>
-
-              <p className="mt-4 text-sm leading-7 text-slate-500">
-                We look at changing markets, emerging technologies and evolving
-                customer behaviour to identify where we can create meaningful
-                businesses.
-              </p>
-
-              <div className="mt-10 h-px bg-slate-200" />
-
-              <p className="mt-8 text-2xl font-semibold tracking-[-0.025em]">
-                Build for the long term.
-              </p>
-
-              <p className="mt-4 text-sm leading-7 text-slate-500">
-                Sustainable growth comes from strong foundations, responsible
-                decisions and continuously improving what we build.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================
-          OUR CULTURE
-      ========================================================= */}
+      {/* SIMPLE OVERVIEW */}
       <section
-        id="culture"
-        className="bg-[#f5f7fa] px-6 py-24 sm:px-10 lg:px-16 lg:py-32"
+        id="overview"
+        className="scroll-mt-20 px-5 py-12 sm:px-8 sm:py-16 lg:px-12"
       >
-        <div className="mx-auto max-w-[1300px]">
-          <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#0165F6]">
-              Our culture
+        <div className="mx-auto grid max-w-[1320px] gap-7 lg:grid-cols-[0.8fr_1.2fr] lg:gap-12">
+          <div className="relative overflow-hidden rounded-[1.75rem] bg-[#edf3fc] p-6 sm:p-8">
+            <span className="absolute -right-8 -top-8 h-36 w-36 rounded-full bg-[#0165F6]/10" />
+            <span className="absolute right-8 top-8 h-12 w-12 rounded-full bg-[#0165F6]/15" />
+            <p className="relative font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-[#0165F6]">
+              THE BRAND / 01
             </p>
-
-            <h2 className="mt-5 text-4xl font-semibold leading-[1.05] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
-              A culture of
-              <span className="block text-slate-400">
-                ownership and curiosity.
-              </span>
+            <h2 className="relative mt-4 max-w-sm font-serif text-3xl font-medium italic leading-[1.08] tracking-tight sm:text-5xl">
+              Meet the drive behind RIJI EV.
             </h2>
+            <div className="relative mt-7 flex items-center gap-3 text-sm font-medium text-slate-600">
+              <span className="h-2 w-2 rounded-full bg-[#0165F6]" />
+              RIJIYA TRADING PRIVATE LIMITED
+            </div>
+          </div>
 
-            <p className="mt-7 max-w-2xl text-base leading-8 text-slate-600">
+          <div className="flex flex-col justify-center rounded-[1.75rem] border border-slate-200 p-6 sm:p-8">
+            <p className="max-w-2xl font-serif text-xl leading-8 text-slate-700 sm:text-2xl sm:leading-10">
+              RIJIYA TRADING PRIVATE LIMITED is an Indian company with a
+              forward-looking outlook. Through RIJI EV, we introduce our
+              electric-mobility initiative and invite people to explore our
+              products and our journey.
+            </p>
+            <a
+              href="/products"
+              className="mt-6 inline-flex w-fit items-center gap-2 text-sm font-semibold text-[#0165F6] transition hover:gap-3"
+            >
+              Meet RIJI EV <ArrowUpRight size={17} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* OUR VISION */}
+      <section className="px-5 pb-12 sm:px-8 sm:pb-16 lg:px-12">
+        <div className="relative mx-auto grid max-w-[1320px] overflow-hidden rounded-[2rem] bg-[#071326] text-white lg:grid-cols-[1fr_0.9fr]">
+          <div className="relative z-10 flex flex-col justify-center p-6 sm:p-9 lg:p-12">
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-blue-300">
+              THE VISION / 02
+            </p>
+            <h2 className="mt-4 max-w-xl font-serif text-4xl font-medium italic leading-[1.02] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
+              Imagine what’s next.
+              <span className="block text-white/45">Move toward it.</span>
+            </h2>
+            <p className="mt-5 max-w-lg text-sm leading-7 text-white/65 sm:text-base">
+              We want to keep learning, respond thoughtfully to changing needs
+              and create strong foundations for the future.
+            </p>
+          </div>
+          <div className="relative min-h-[230px] overflow-hidden sm:min-h-[300px] lg:min-h-[360px]">
+            <img
+              src={companyImage}
+              alt="A glimpse into the RIJI EV journey"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover opacity-70"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#071326] via-[#071326]/20 to-transparent" />
+            <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full border border-white/25" />
+            <div className="absolute right-5 top-5 h-40 w-40 rounded-full border border-blue-300/40" />
+            <div className="absolute bottom-5 right-5 rounded-2xl bg-[#0165F6] p-4 sm:bottom-7 sm:right-7 sm:p-5">
+              <Zap size={27} />
+              <p className="mt-2 text-xs font-semibold uppercase tracking-[0.15em]">
+                Charge your curiosity
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* OUR CULTURE */}
+      <section className="px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
+        <div className="mx-auto max-w-[1320px]">
+          <div className="mb-7 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+            <div>
+              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-[#0165F6]">
+                THE MINDSET / 03
+              </p>
+              <h2 className="mt-3 max-w-3xl font-serif text-3xl font-medium italic leading-tight tracking-[-0.04em] sm:text-5xl lg:text-6xl">
+                A culture of ownership and curiosity.
+              </h2>
+            </div>
+            <p className="max-w-md text-sm leading-6 text-slate-500">
               We want people to think independently, take responsibility for
               their work and remain curious about how things can be improved.
             </p>
           </div>
 
-          <div className="mt-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {values.map((value) => {
               const Icon = value.icon;
-
               return (
-                <div
-                  key={value.title}
-                  className="group rounded-[1.5rem] bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/50 sm:p-10"
+                <article
+                  key={value.number}
+                  className="group relative min-h-[180px] overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white p-5 transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:bg-[#f7faff] sm:p-6"
                 >
-                  <Icon
-                    size={27}
-                    strokeWidth={1.5}
-                    className="text-[#0165F6]"
-                  />
-
-                  <h3 className="mt-12 text-xl font-semibold tracking-[-0.02em]">
+                  <span className="absolute -right-7 -top-7 h-24 w-24 rounded-full bg-[#0165F6]/[0.06] transition group-hover:scale-125" />
+                  <div className="relative flex items-center justify-between">
+                    <span className="text-xs font-semibold tracking-[0.18em] text-slate-400">
+                      {value.number}
+                    </span>
+                    <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-50 text-[#0165F6]">
+                      <Icon size={20} strokeWidth={1.7} />
+                    </span>
+                  </div>
+                  <h3 className="relative mt-7 text-lg font-semibold tracking-tight">
                     {value.title}
                   </h3>
-
-                  <p className="mt-4 text-sm leading-7 text-slate-500">
+                  <p className="relative mt-2 text-sm leading-6 text-slate-500">
                     {value.text}
                   </p>
-                </div>
+                </article>
               );
             })}
           </div>
         </div>
       </section>
 
-      {/* =========================================================
-          HOW WE WORK
-      ========================================================= */}
-      <section className="px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
-        <div className="mx-auto max-w-[1250px]">
-          <div className="grid gap-14 lg:grid-cols-[0.65fr_1.35fr] lg:gap-24">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#0165F6]">
-                How we work
-              </p>
-
-              <h2 className="mt-5 text-4xl font-semibold leading-[1.05] tracking-[-0.045em] sm:text-5xl">
-                Ideas are only the beginning.
-              </h2>
-
-              <p className="mt-7 text-base leading-8 text-slate-600">
-                We believe good ideas become meaningful only through disciplined
-                execution, learning and continuous improvement.
-              </p>
-            </div>
-
-            <div className="divide-y divide-slate-200 border-y border-slate-200">
-              {principles.map((principle, index) => (
-                <div key={principle} className="flex items-center gap-7 py-7">
-                  <span className="text-sm font-medium text-[#0165F6]">
-                    0{index + 1}
-                  </span>
-
-                  <p className="text-xl font-medium tracking-[-0.02em] sm:text-2xl">
-                    {principle}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================
-          PEOPLE
-      ========================================================= */}
-      <section className="bg-slate-950 px-6 py-24 text-white sm:px-10 lg:px-16 lg:py-32">
-        <div className="mx-auto grid max-w-[1350px] items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-24">
-          {/* Image */}
-          <div className="overflow-hidden rounded-[2rem]">
+      {/* OUR PEOPLE */}
+      <section className="px-5 py-6 sm:px-8 sm:py-8 lg:px-12">
+        <div className="mx-auto grid max-w-[1320px] overflow-hidden rounded-[2rem] border border-slate-200 lg:grid-cols-[1fr_0.85fr]">
+          <div className="relative min-h-[260px] overflow-hidden bg-[#dfe9f8] sm:min-h-[320px]">
             <img
-              src={teamImage}
-              alt="RIJIYA team"
+              src={companyImage}
+              alt="The people and ideas behind RIJIYA"
               loading="lazy"
-              className="h-[500px] w-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover"
             />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#071326]/65 via-transparent to-transparent" />
+            <span className="absolute bottom-5 left-5 rounded-full border border-white/30 bg-[#071326]/30 px-4 py-2 text-xs font-medium text-white backdrop-blur">
+              People · Ideas · Possibilities
+            </span>
+            <span className="absolute -right-8 -top-8 h-36 w-36 rounded-full border-[16px] border-white/25" />
           </div>
-
-          {/* Text */}
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#4b91ff]">
-              Our people
+          <div className="flex flex-col justify-center bg-[#f6f8fc] p-6 sm:p-9 lg:p-10">
+            <p className="font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-[#0165F6]">
+              THE PEOPLE / 04
             </p>
-
-            <h2 className="mt-5 text-4xl font-semibold leading-[1.05] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
-              Great companies are built by people.
+            <h2 className="mt-3 font-serif text-3xl font-medium italic leading-[1.08] tracking-tight sm:text-5xl">
+              A brand moves forward when people move together.
             </h2>
-
-            <p className="mt-8 max-w-xl text-base leading-8 text-slate-400 sm:text-lg">
-              We want to create an environment where people can take ownership,
-              share ideas, challenge assumptions and grow together.
+            <p className="mt-4 text-sm leading-7 text-slate-600 sm:text-base">
+              We value collaboration, respect and an open exchange of ideas.
+              Different perspectives help us learn, adapt and approach new
+              challenges with a broader view.
             </p>
-
-            <p className="mt-5 max-w-xl text-base leading-8 text-slate-400">
-              Different perspectives make stronger businesses. Collaboration is
-              therefore not just part of how we work — it is part of how we
-              build.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================
-          OUR ECOSYSTEM
-      ========================================================= */}
-      <section className="px-6 py-24 sm:px-10 lg:px-16 lg:py-32">
-        <div className="mx-auto max-w-[1300px]">
-          <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#0165F6]">
-              Our ecosystem
-            </p>
-
-            <h2 className="mt-5 text-4xl font-semibold leading-[1.05] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
-              Building beyond
-              <span className="block text-slate-400">a single business.</span>
-            </h2>
-
-            <p className="mt-7 max-w-2xl text-base leading-8 text-slate-600">
-              RIJIYA is being built as a company capable of developing
-              businesses around meaningful opportunities. RIJI EV represents our
-              focus on the growing electric mobility space.
-            </p>
-          </div>
-
-          {/* RIJI EV */}
-          <div className="mt-16 overflow-hidden rounded-[2rem] bg-[#f5f7fa]">
-            <div className="grid items-center lg:grid-cols-[0.8fr_1.2fr]">
-              <div className="p-8 sm:p-12 lg:p-16">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-400">
-                  A RIJIYA venture
-                </p>
-
-                <h3 className="mt-4 text-4xl font-semibold tracking-[-0.04em]">
-                  RIJI EV
-                </h3>
-
-                <p className="mt-6 max-w-lg text-base leading-8 text-slate-600">
-                  Our electric mobility initiative focused on creating practical
-                  solutions for the evolving transportation needs of India.
-                </p>
-
-                <a
-                  href="/products"
-                  className="group mt-8 inline-flex items-center gap-3 text-sm font-medium"
-                >
-                  Explore RIJI EV
-                  <ArrowUpRight
-                    size={17}
-                    className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  />
-                </a>
-              </div>
-
-              <div className="flex min-h-[380px] items-center justify-center bg-white">
-                <img
-                  src={companyImage}
-                  alt="RIJI EV"
-                  loading="lazy"
-                  className="h-full max-h-[430px] w-full object-contain p-10"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================
-          COMMITMENT
-      ========================================================= */}
-      <section className="border-y border-slate-200 bg-white px-6 py-24 sm:px-10 lg:px-16 lg:py-28">
-        <div className="mx-auto max-w-[1100px] text-center">
-          <Sparkles
-            size={30}
-            strokeWidth={1.5}
-            className="mx-auto text-[#0165F6]"
-          />
-
-          <h2 className="mt-7 text-4xl font-semibold leading-[1.05] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
-            Building with responsibility.
-            <span className="block text-slate-400">Growing with purpose.</span>
-          </h2>
-
-          <p className="mx-auto mt-8 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-            Our ambition is not simply to grow. It is to build businesses,
-            relationships and an organisation that can create meaningful value
-            over the long term.
-          </p>
-        </div>
-      </section>
-
-      {/* =========================================================
-          FUTURE
-      ========================================================= */}
-      <section className="bg-[#0165F6] px-6 py-24 text-white sm:px-10 lg:px-16 lg:py-32">
-        <div className="mx-auto max-w-[1250px]">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-white/60">
-            Looking ahead
-          </p>
-
-          <div className="mt-6 flex flex-col justify-between gap-12 lg:flex-row lg:items-end">
-            <h2 className="max-w-4xl text-4xl font-semibold leading-[1.02] tracking-[-0.045em] sm:text-5xl lg:text-7xl">
-              The future is not something we wait for.
-              <span className="block text-white/50">
-                It is something we build.
-              </span>
-            </h2>
-
             <a
-              href="/contact"
-              className="group inline-flex shrink-0 items-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-medium text-slate-950 transition hover:bg-slate-100"
+              href="#leadership"
+              className="mt-5 inline-flex w-fit items-center gap-2 text-sm font-semibold text-[#0165F6] hover:gap-3"
             >
-              Connect with us
-              <ArrowUpRight
-                size={17}
-                className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
+              Meet our directors <ArrowRight size={17} />
             </a>
           </div>
         </div>
       </section>
 
-      {/* =========================================================
-          FOOTER BRAND STATEMENT
-      ========================================================= */}
-      <section className="bg-slate-950 px-6 py-16 text-white sm:px-10 lg:px-16">
-        <div className="mx-auto flex max-w-[1250px] flex-col justify-between gap-6 sm:flex-row sm:items-center">
-          <div>
-            <p className="text-2xl font-semibold tracking-[-0.03em]">
-              RIJIYA PVT. LTD.
+      {/* OUR ECOSYSTEM / RIJI EV */}
+      <section className="px-5 py-6 sm:px-8 sm:py-8 lg:px-12">
+        <div className="mx-auto max-w-[1320px]">
+          <div className="mb-5 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+            <div>
+              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-[#0165F6]">
+                THE RIJI EV EXPERIENCE / 05
+              </p>
+              <h2 className="mt-3 max-w-3xl font-serif text-3xl font-medium italic leading-tight tracking-[-0.04em] sm:text-5xl lg:text-6xl">
+                Meet your next possibility.
+              </h2>
+            </div>
+            <p className="max-w-md text-sm leading-6 text-slate-500">
+              RIJI EV is the electric-mobility initiative featured on this
+              website. Explore the vehicles and learn more about the range.
             </p>
+          </div>
+        </div>
+        <div className="mx-auto max-w-[1320px] overflow-hidden rounded-[2rem] bg-[#eaf1fc]">
+          <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="flex flex-col items-start justify-center p-6 sm:p-9 lg:p-12">
+              <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-white/80 px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#0165F6]">
+                <Zap size={14} /> Electric by vision
+              </span>
+              <h2 className="mt-5 text-5xl font-semibold tracking-[-0.07em] sm:text-7xl">
+                RIJI<span className="text-[#0165F6]"> EV</span>
+              </h2>
+              <p className="mt-4 max-w-md text-sm leading-7 text-slate-600 sm:text-base">
+                Discover RIJI EV, our electric-mobility initiative. Explore the
+                range, view vehicle details and learn more about our direction.
+              </p>
+              <a
+                href="/products"
+                className="mt-6 inline-flex items-center gap-3 rounded-full bg-[#0165F6] px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-700"
+              >
+                Explore the lineup <ArrowRight size={17} />
+              </a>
+            </div>
+            <div className="relative min-h-[240px] overflow-hidden bg-slate-200 sm:min-h-[320px] lg:min-h-[380px]">
+              <img
+                src={companyImage}
+                alt="RIJI EV"
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover transition duration-700 hover:scale-[1.03]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#eaf1fc]/30 via-transparent to-[#071326]/20" />
+              <div className="absolute -bottom-12 -left-12 h-40 w-40 rounded-full border-[18px] border-white/40" />
+              <span className="absolute right-5 top-5 rounded-full bg-white/90 px-4 py-2 text-xs font-semibold text-slate-700">
+                Your journey. Your direction.
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
 
-            <p className="mt-2 text-sm text-slate-500">
-              Building businesses for what comes next.
+      {/* LOOKING AHEAD */}
+      <section className="px-5 py-6 sm:px-8 sm:py-8 lg:px-12">
+        <div className="relative mx-auto max-w-[1320px] overflow-hidden rounded-[2rem] bg-[#071326] px-6 py-8 text-white sm:px-9 sm:py-10 lg:px-12 lg:py-12">
+          <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full border border-white/15 sm:h-96 sm:w-96" />
+          <div className="pointer-events-none absolute right-8 top-8 h-36 w-36 rounded-full border border-blue-300/25 sm:h-52 sm:w-52" />
+          <div className="relative grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+            <div>
+              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-blue-300">
+                LOOKING AHEAD / 06
+              </p>
+              <h2 className="mt-3 max-w-3xl font-serif text-4xl font-medium italic leading-[1.02] tracking-[-0.045em] sm:text-6xl lg:text-7xl">
+                Build a company prepared for the opportunities of tomorrow.
+              </h2>
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-white/75 sm:text-base">
+                We want RIJIYA to grow into an organisation capable of creating
+                businesses across meaningful and evolving sectors — while
+                remaining grounded in people, responsibility and long-term
+                thinking.
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+              <article className="rounded-2xl border border-white/15 bg-white/[0.06] p-5 backdrop-blur-sm">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#0165F6]">
+                  <Compass size={20} />
+                </div>
+                <h3 className="text-lg font-semibold">Think beyond today.</h3>
+                <p className="mt-2 text-sm leading-6 text-white/65">
+                  We look at changing markets, emerging technologies and
+                  evolving customer behaviour to identify where we can create
+                  meaningful businesses.
+                </p>
+              </article>
+              <article className="rounded-2xl border border-white/15 bg-white/[0.06] p-5 backdrop-blur-sm">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#0165F6]">
+                  <ArrowUpRight size={20} />
+                </div>
+                <h3 className="text-lg font-semibold">
+                  Build for the long term.
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-white/65">
+                  Sustainable growth comes from strong foundations, responsible
+                  decisions and continuously improving what we build.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* HOW WE WORK */}
+      <section className="px-5 py-6 sm:px-8 sm:py-8 lg:px-12">
+        <div className="mx-auto max-w-[1320px]">
+          <div className="grid gap-5 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+            <div>
+              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-[#0165F6]">
+                HOW WE WORK
+              </p>
+              <h2 className="mt-3 max-w-3xl font-serif text-3xl font-medium italic leading-tight tracking-[-0.04em] sm:text-5xl lg:text-6xl">
+                Ideas are only the beginning.
+              </h2>
+            </div>
+            <p className="max-w-xl text-sm leading-7 text-slate-600 sm:text-base lg:justify-self-end">
+              We believe good ideas become meaningful only through disciplined
+              execution, learning and continuous improvement.
             </p>
           </div>
 
-          <a
-            href="/contact"
-            className="group inline-flex items-center gap-2 text-sm font-medium text-white"
-          >
-            Get in touch
-            <ArrowRight
-              size={16}
-              className="transition-transform duration-200 group-hover:translate-x-1"
-            />
-          </a>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+            {[
+              "Start with the real problem",
+              "Build with purpose",
+              "Learn continuously",
+              "Take ownership",
+              "Create long-term value",
+            ].map((step, index) => (
+              <article
+                key={step}
+                className="group relative min-h-[150px] overflow-hidden rounded-[1.4rem] bg-[#edf3fc] p-5 transition duration-300 hover:-translate-y-1 hover:bg-[#e2ecfb]"
+              >
+                <span className="absolute -right-5 -top-5 h-20 w-20 rounded-full border-[10px] border-[#0165F6]/10 transition group-hover:scale-110" />
+                <p className="relative text-xs font-bold tracking-[0.2em] text-[#0165F6]">
+                  {String(index + 1).padStart(2, "0")}
+                </p>
+                <h3 className="relative mt-7 max-w-[190px] text-lg font-semibold leading-snug tracking-tight">
+                  {step}
+                </h3>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
-    </div>
+
+      {/* DIRECTORS */}
+      <section
+        id="leadership"
+        className="scroll-mt-20 px-5 pb-12 pt-4 sm:px-8 sm:pb-16 lg:px-12"
+      >
+        <div className="mx-auto max-w-[1320px] rounded-[2rem] bg-[#f5f7fa] p-6 sm:p-9 lg:p-12">
+          <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+            <div>
+              <p className="font-mono text-[10px] font-bold uppercase tracking-[0.24em] text-[#0165F6]">
+                Leadership
+              </p>
+              <h2 className="mt-3 max-w-3xl font-serif text-3xl font-medium italic leading-tight tracking-[-0.04em] sm:text-5xl lg:text-6xl">
+                The people behind the vision.
+              </h2>
+            </div>
+            <p className="max-w-sm text-sm leading-6 text-slate-500">
+              Leadership guiding the journey behind RIJI EV.
+            </p>
+          </div>
+
+          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+            {directors.map((director) => (
+              <article
+                key={director.number}
+                className="group relative flex items-center gap-4 overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white p-5 sm:p-6"
+              >
+                <div className="relative flex h-[68px] w-[68px] shrink-0 items-center justify-center overflow-hidden rounded-[1.25rem] bg-[#071326] text-xl font-semibold tracking-tight text-white">
+                  <span className="absolute -right-4 -top-4 h-12 w-12 rounded-full bg-[#0165F6]" />
+                  <span className="relative">{director.initials}</span>
+                </div>
+                <div className="min-w-0">
+                  <p className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-[#0165F6]">
+                    Director {director.number}
+                  </p>
+                  <h3 className="mt-1 break-words text-sm font-extrabold uppercase leading-snug tracking-[0.035em] sm:text-base">
+                    {director.name}
+                  </h3>
+                  <p className="mt-1 text-xs text-slate-500">
+                    Board of Directors
+                  </p>
+                </div>
+                <ArrowUpRight
+                  size={18}
+                  className="ml-auto shrink-0 text-slate-400 transition group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[#0165F6]"
+                />
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* COMPACT FOOTER */}
+
+      <Footer />
+    </main>
   );
 }
